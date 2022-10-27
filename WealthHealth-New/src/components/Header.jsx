@@ -17,17 +17,20 @@ function Header()
         <header className=''>
          
             <nav className=''>
-      
                 <NavLink 
-                    className="nav-link"
-                    activeClassName="active"
-                    
+                    className={({ isActive }) => isActive ? "nav-link active": "nav-link"}
                     to="/">
                     <img
                         className='accueillogo'
                         // src={Logo} 
                         alt=""
                     />
+                    
+                </NavLink>
+
+                <NavLink 
+                    className={({ isActive }) => isActive ? "nav-link active": "nav-link"}
+                    to="/home">
                     Home
                 </NavLink>
 
