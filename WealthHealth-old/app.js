@@ -1,6 +1,8 @@
-$( function() {
+$( function()
+{
     const stateSelect = document.getElementById('state');
-    states.forEach(function(state) {
+    states.forEach(function(state)
+    {
         const option = document.createElement('option');
         option.value = state.abbreviation;
         option.text = state.name;
@@ -20,7 +22,8 @@ $( function() {
     });
 });
 
-function saveEmployee() {
+function saveEmployee()
+{
     const firstName = document.getElementById('first-name');
     const lastName = document.getElementById('last-name');
     const dateOfBirth = document.getElementById('date-of-birth');
@@ -32,6 +35,7 @@ function saveEmployee() {
     const zipCode = document.getElementById('zip-code');
 
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
+
     const employee = {
         firstName: firstName.value,
         lastName: lastName.value,
@@ -43,8 +47,11 @@ function saveEmployee() {
         state: state.value,
         zipCode: zipCode.value
     };
+
     employees.push(employee);
+
     localStorage.setItem('employees', JSON.stringify(employees));
+    
     $('#confirmation').modal();
 }
 

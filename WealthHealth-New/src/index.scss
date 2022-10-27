@@ -10,6 +10,10 @@ code
 {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+.test
+{
+    border: 1px solid red;
+}
 // reset comportment of balsies "a"
 a
 {
@@ -24,4 +28,36 @@ a
 .active
 {
     color: red;
+}
+
+header
+{
+    display: flex;
+    flex-direction: column;
+
+    .logo
+    {
+        display: flex;
+        justify-content: center;
+        
+        .nav-link 
+        {
+            margin: 1em;
+            .accueillogo
+            {
+                height: 140px;
+            }
+        }
+    }
+    nav
+    {
+        display: flex;
+        justify-content: center;
+
+        .nav-link 
+        {
+            margin: 2em;
+        }
+        
+    }
 }

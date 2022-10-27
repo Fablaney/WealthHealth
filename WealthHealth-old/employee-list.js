@@ -1,4 +1,5 @@
-$(function() {
+$(function()
+{
     const employees = JSON.parse(localStorage.getItem('employees'));
 
     $('#employee-table').DataTable({
