@@ -2,10 +2,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 // import perso
-import { employeesListReducer } from './employeeListSlice'
+// import { EmployeeListReducer } from './employeeListSlice'
+import employeeListSliceReducer from './employeeListSlice'
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
-        employeesList: employeesListReducer.reducer
+        employeesList: employeeListSliceReducer
     }
 })
+
+export default store

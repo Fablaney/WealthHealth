@@ -1,15 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const employeesListReducer = createSlice({
+const inistialState = {
+   
+    firstName: null,
+    lastName: null,
+    dateOfBirth: null,
+    startDate: null,
+    street: null,
+    city: null,
+    state: null,
+    zipCode: null,
+    department: null
+}
+
+export const employeeSlice = createSlice({
     name: 'employeesList',
-    inistialState: [],
+    inistialState,
     reducers: {
-        addEmployee: (state, action) => {
-            state.push(action.payload)
-            return state
+        addEmployee(state, action)
+        {
+            state.firstName = action.payload.firstName,
+            state.lastName = action.payload.lastName,
+            state.dateOfBirth = action.payload.dateOfBirth,
+            state.startDate = action.payload.startDate,
+            state.street = action.payload.street,
+            state.city = action.payload.city,
+            state.state = action.payload.state,
+            state.zipCode = action.payload.zipCode,
+            state.department = action.payload.department
         }
     }
 })
 
-export const { addEmployee } = employeesListReducer.actions
-export const employeeState = (state) => state
+export const employeeActions = employeeSlice.actions
+
+export default employeeSlice.reducer
