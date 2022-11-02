@@ -1,0 +1,81 @@
+.form-block
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #282c34;
+    color: white;
+    padding: 5%;
+
+    form
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        border: 4px white solid;
+        border-radius: 0 2em;
+        width: 600px;
+        padding: 3em;
+
+        label
+        {
+            width: 100%;
+        }
+
+        input, option
+        {
+            width: 100%;
+            margin-bottom: 1em;
+            height: 3em;
+            border-radius: 8px;
+            padding: 1em;
+            border: none;
+            outline: none;
+        }
+        select
+        {
+            width: 100%;
+            margin-bottom: 1em;
+            height: 3em;
+            border-radius: 8px;
+            padding: 0 1em;
+            border: none;
+            outline: none;
+        }
+
+        fieldset
+        {
+            width: 100%;
+            margin-bottom: 1em;
+            display: flex;
+            flex-direction: column;
+        }
+
+        select
+        {
+            width: 100%;
+            margin-bottom: 1em;
+        }
+
+        button
+        {
+            background-color: rgb(2, 184, 2);
+            border: none;
+            border-radius: 8px;
+
+            padding: 1em 2em;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            box-shadow: white 0px 0px 0px;
+
+            &:hover
+            {
+                background-color: rgb(3, 156, 3);
+                box-shadow: white 8px 8px 8px;
+            }
+        }
+    }
+}
