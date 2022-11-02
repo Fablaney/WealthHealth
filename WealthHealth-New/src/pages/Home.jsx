@@ -14,6 +14,7 @@ function Home()
 {
     const {register, handleSubmit} = useForm()
 
+
     const onSubmit = data => {
         console.log(data)
     }
@@ -27,6 +28,7 @@ function Home()
             </div>
 
             <div className='form-block'>
+
                 <form className='test' action="" onSubmit={handleSubmit(onSubmit)}>
 
                     <label htmlFor="first-name">First Name</label>
@@ -115,6 +117,7 @@ function Home()
                     <button>Save</button>
 
                 </form>
+
             </div>
 
         </>
