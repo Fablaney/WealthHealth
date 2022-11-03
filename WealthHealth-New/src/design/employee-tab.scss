@@ -1,0 +1,29 @@
+.employee-tab
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #282c34;
+    color: white;
+    padding: 5%;
+}
+.show-search
+{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3em;
+}
+.table
+{
+    width: 80%;
+    margin-bottom: 3em;
+}
+.count-next-prev
+{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3em;
+}
