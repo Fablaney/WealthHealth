@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     background-color: #282c34;
     color: white;
     padding: 5%;
@@ -71,11 +70,11 @@
             margin-bottom: 1em;
             box-shadow: white 0px 0px 0px;
 
-            &:hover
-            {
-                background-color: rgb(3, 156, 3);
-                box-shadow: white 8px 8px 8px;
-            }
+            // &:hover
+            // {
+            //     background-color: rgb(3, 156, 3);
+            //     box-shadow: white 8px 8px 8px;
+            // }
         }
     }
 }
