@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 
 // import perso
 import Logo from "../assets/logoWH.jpg"
-
+import "../design/header.scss"
 /**
  * @component
  * @description Render of the Header
