@@ -4,25 +4,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #282c34;
+    margin: auto;
+    width: 80%;
+    border: 4px white solid;
+    border-radius: 0 2em;
+    background-color: rgba(44, 40, 70, 0.5);
     color: white;
-    padding: 5%;
+    // padding: 5%;
+    margin-bottom: 5%;
 }
 .show-search
 {
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 3em;
 }
 .table
 {
-    width: 80%;
+    width: 100%;
     margin-bottom: 3em;
 }
 .count-next-prev
 {
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 3em;

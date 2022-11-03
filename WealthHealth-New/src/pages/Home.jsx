@@ -30,7 +30,7 @@ function Home()
 
             <div className='form-block'>
 
-                <form className='test' action="" onSubmit={handleSubmit(onSubmit)}>
+                <form className='' action="" onSubmit={handleSubmit(onSubmit)}>
 
                     <label htmlFor="first-name">First Name</label>
                     <input

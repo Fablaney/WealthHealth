@@ -1,34 +1,41 @@
 header
 {
-    display: flex;
-    flex-direction: column;
-
-    .logo
-    {
-        display: flex;
-        justify-content: center;
-        
-        .nav-link 
-        { 
-            margin: 1em;
-
-            .accueillogo
-            {
-                height: 140px;
-            }
-        }
-    }
+    padding: 1%;
     nav
     {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
 
+        .left
+        {
+            width: 45%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .center
+        {
+            width: 10%;
+            display: flex;
+            justify-content: center;
+
+            .accueillogo
+            {
+                height: 100px;
+            }
+        }
+        .right
+        {
+            width: 45%;
+            display: flex;
+            justify-content: flex-start;
+        }
         .nav-link 
         {
             color: green;
             font-weight: 700;
             font-size: 30px;
-            margin: 1em 2em;
+            margin: 1em 1em;
         }
     }
 }

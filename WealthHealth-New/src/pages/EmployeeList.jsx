@@ -17,6 +17,7 @@ function EmployeeList()
         { title: 'State', data: 'state' },
         { title: 'Zip Code', data: 'zipCode' },
     ]
+    const count = 0
 
     return (
         <>
@@ -26,7 +27,7 @@ function EmployeeList()
 
             </div>
             
-            <div className='employee-tab'>
+            <div className='employee-tab test'>
 
                 {/* div show number + search */}
                 <div className='show-search'>
@@ -53,7 +54,7 @@ function EmployeeList()
                             {/* boucle sur les colones */}
                             {
                                 columns.map((column) => (
-                                    <th colspan={column.data}>{column.title}</th>
+                                    <th colSpan={column.data} key={column.data}>{column.title}</th>
                                 ))
                             }
                         </tr>
@@ -63,8 +64,8 @@ function EmployeeList()
                         
                             {/* boucle sur les colones */}
                             {
-                                mockedList.map((employee) => (
-                                    <tr>
+                                mockedList.map((employee, index) => (
+                                    <tr key={index}>
                                         <td>{employee.FirstName}</td>
                                         <td>{employee.LastName}</td>
                                         <td>{employee.StartDate}</td>
@@ -78,8 +79,7 @@ function EmployeeList()
                                 ))
                             }
                             {/* <td>no datas for the moment</td> */}
-                         
-                        
+
                     </tbody>
 
                 </table>

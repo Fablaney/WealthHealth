@@ -3,9 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #282c34;
     color: white;
-    padding: 5%;
 
     form
     {
@@ -14,6 +12,7 @@
         justify-content: center;
         align-items: center;
 
+        background-color: rgba(44, 40, 70, 0.5);
         border: 4px white solid;
         border-radius: 0 2em;
         width: 600px;
@@ -22,6 +21,7 @@
         label
         {
             width: 100%;
+            margin-bottom: 0.5em;
         }
 
         input, option
@@ -61,20 +61,12 @@
 
         button
         {
-            background-color: rgb(2, 184, 2);
             border: none;
             border-radius: 8px;
 
             padding: 1em 2em;
             margin-top: 1em;
             margin-bottom: 1em;
-            box-shadow: white 0px 0px 0px;
-
-            // &:hover
-            // {
-            //     background-color: rgb(3, 156, 3);
-            //     box-shadow: white 8px 8px 8px;
-            // }
         }
     }
 }

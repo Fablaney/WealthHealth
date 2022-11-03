@@ -3,7 +3,8 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 // import perso
-import Logo from "../assets/logoWH.jpg"
+// import Logo from "../assets/logoWH.jpg"
+import Logo from "../assets/logo-HRNet.svg"
 import "../design/header.scss"
 /**
  * @component
@@ -17,27 +18,36 @@ function Header()
     return (
         <header className=''>
 
-            <div className="logo">
-                <NavLink
-                    className="nav-link"
-                    to="/home">
-                    <img className='accueillogo' src={Logo} alt=""/>
-                </NavLink>
-            </div>
-
             <nav className=''>
 
-                <NavLink 
-                    className={({ isActive }) => isActive ? "nav-link active": "nav-link"}
-                    to="/home">
-                    Home
-                </NavLink>
+                <div className="left">
 
-                <NavLink
-                    className={({ isActive }) => isActive ? "nav-link active": "nav-link"}
-                    to="/employeelist">
-                    Employee List
-                </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => isActive ? "nav-link active": "nav-link"}
+                        to="/home"
+                    >
+                        Home
+                    </NavLink>
+
+                </div>
+
+                <div className="center">
+
+                    <NavLink
+                        className="nav-link logo"
+                        to="/home">
+                        <img className='accueillogo' src={Logo} alt=""/>
+                    </NavLink>
+
+                </div>
+
+                <div className="right">
+                    <NavLink
+                        className={({ isActive }) => isActive ? "nav-link active": "nav-link"}
+                        to="/employeelist">
+                        Employee List
+                    </NavLink>
+                </div>
 
             </nav>
          
