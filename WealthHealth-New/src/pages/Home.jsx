@@ -10,6 +10,7 @@ import '../design/form-block.scss'
 
 import { states, departments } from '../datas/datas.js'
 
+
 function Home()
 {
     const {register, handleSubmit} = useForm()
