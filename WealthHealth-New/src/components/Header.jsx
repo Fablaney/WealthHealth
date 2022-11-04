@@ -35,7 +35,7 @@ function Header()
 
                     <NavLink
                         className="nav-link logo"
-                        to="/home">
+                        to="/">
                         <img className='accueillogo' src={Logo} alt=""/>
                     </NavLink>
 
