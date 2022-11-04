@@ -2,9 +2,20 @@ import '../design/App.scss'
 import "../design/employee-tab.scss"
 
 import { mockedList } from '../datas/datas'
+import { useSelector } from 'react-redux'
+
 
 function EmployeeList()
 {
+    const employees = useSelector(state => {
+        console.log(state.employeesList.employees)
+        return state.employeesList.employees
+    })
+
+    console.log(employees)
+
+
+
     // colones du tableau
     const columns = [
         { title: 'First Name', data: 'firstName' },
@@ -17,6 +28,7 @@ function EmployeeList()
         { title: 'State', data: 'state' },
         { title: 'Zip Code', data: 'zipCode' },
     ]
+
     const count = 0
 
     return (
@@ -64,9 +76,9 @@ function EmployeeList()
                         
                             {/* boucle sur les colones */}
                             {
-                                mockedList.map((employee, index) => (
+                                employees.map((employee, index) => (
                                     <tr key={index}>
-                                        <td>{employee.FirstName}</td>
+                                        <td>{employee["first-name"]}</td>
                                         <td>{employee.LastName}</td>
                                         <td>{employee.StartDate}</td>
                                         <td>{employee.Department}</td>

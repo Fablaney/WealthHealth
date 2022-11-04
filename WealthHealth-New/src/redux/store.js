@@ -6,9 +6,8 @@ import EmployeeListReducer from '../redux/employeeListSlice'
 
 const store = configureStore({
     reducer: {
-        // employeesList: EmployeeListReducer
+        employeesList: EmployeeListReducer
     }
 })
 
 export default store
-

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Provider } from 'react'
+import { Provider } from 'react-redux'
 
 // Import perso
 // CSS
@@ -18,7 +18,7 @@ import store from './redux/store'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
-    // <Provider store={store}>
+    <Provider store={store}>
 
         <BrowserRouter>
 
@@ -33,5 +33,5 @@ root.render(
 
         </BrowserRouter>
 
-    // </Provider>
+    </Provider>
 )

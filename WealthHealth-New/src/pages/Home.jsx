@@ -3,22 +3,43 @@ import React from 'react'
 
 // import useForm
 import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+
+import { mockedList } from '../datas/datas.js'
 
 // import perso
 import '../design/App.scss'
 import '../design/form-block.scss'
-
+import { employeeActions } from '../redux/employeeListSlice'
 import { states, departments } from '../datas/datas.js'
 
+import ImputDate from '../components/DatePicker.jsx'
 
 function Home()
 {
     const {register, handleSubmit} = useForm()
+    const dispatch = useDispatch()
 
-
+    useEffect(()=>{
+        
+        dispatch(employeeActions.getEmployees(mockedList))
+    
+    }, [])
+    
     const onSubmit = data => {
-        console.log(data)
+
+        // console.log(data)
+
+        dispatch(employeeActions.addEmployee(data))
     }
+
+    // useEffect(() => {
+
+        // addEmployee(data)
+
+    // },[])
 
     return (
         <>
@@ -47,6 +68,7 @@ function Home()
                     />
 
                     <label htmlFor="date-of-birth">Date of Birth</label>
+                    <ImputDate></ImputDate>
                     <input
                         type="date"
                         id="date-of-birth"
