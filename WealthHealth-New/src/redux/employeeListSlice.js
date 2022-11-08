@@ -4,7 +4,6 @@ const initialState = {
     employees: []
 }
 
-
 const employeeSlice = createSlice({
     name: 'employeesList',
     initialState,
@@ -12,7 +11,6 @@ const employeeSlice = createSlice({
         addEmployee(state, action)
         {
             state.employees.push(action.payload)
-         
         },
         getEmployees(state, action)
         {

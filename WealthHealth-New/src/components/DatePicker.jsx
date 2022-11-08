@@ -1,21 +1,107 @@
-import React from 'react';
+import React, { useState } from "react"
 
-import { format } from 'date-fns';
-import { DayPicker } from 'react-day-picker';
+// plugin
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import getYear from "date-fns/getYear"
+import getMonth from "date-fns/getMonth"
+import range from "lodash.range"
 
-export default function ImputDate() {
-  const [selected, setSelected] = React.useState();
+function ImputDate(param)
+{
+    // console.log(param)
+    const [startDate, setStartDate] = useState(new Date())
 
-  let footer = <p>Please pick a day.</p>;
-  if (selected) {
-    footer = <p>You picked {format(selected, 'PP')}.</p>;
-  }
-  return (
-    <DayPicker
-      mode="single"
-      selected={selected}
-      onSelect={setSelected}
-      footer={footer}
-    />
-  );
+    const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
+        // <input className="custom-input-date" onClick={onClick} ref={ref} value={value}/>
+            
+        <button className="custom-input-date" onClick={onClick} ref={ref}>
+            {value}
+        </button>
+    ))
+
+    const years = range(1970, getYear(new Date()) + 10, 1)
+
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ]
+
+    return (
+
+        <DatePicker
+        
+            renderCustomHeader={({
+            date,
+            changeYear,
+            changeMonth,
+            decreaseMonth,
+            increaseMonth,
+            prevMonthButtonDisabled,
+            nextMonthButtonDisabled,
+            }) => (
+                <div
+                    style={{
+                        margin: 1,
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                    >
+ 
+                    <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                        {"<"}
+                    </button>
+
+                    <select
+                        value={getYear(date)}
+                        onChange={({ target: { value } }) => changeYear(value)}
+                    >
+                        {years.map((option) => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                        ))}
+                    </select>
+
+                    <select
+                        value={months[getMonth(date)]}
+                        onChange={({ target: { value } }) =>
+                        changeMonth(months.indexOf(value))
+                        }
+                    >
+                        {months.map((option) => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                        ))}
+                    </select>
+
+                    <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                        {">"}
+                    </button>
+
+                </div>
+            )}
+
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            customInput={<ExampleCustomInput />}
+            withPortal
+            fixedHeight
+            dateFormat="dd/MM/yyyy"
+
+        />
+            
+    )
 }
+export default ImputDate

@@ -6,16 +6,16 @@ import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-
-import { mockedList } from '../datas/datas.js'
-
 // import perso
 import '../design/App.scss'
 import '../design/form-block.scss'
+import { mockedList } from '../datas/datas.js'
 import { employeeActions } from '../redux/employeeListSlice'
 import { states, departments } from '../datas/datas.js'
 
+// composents
 import ImputDate from '../components/DatePicker.jsx'
+import Dropdown from '../components/Dropdown.jsx'
 
 function Home()
 {
@@ -30,16 +30,10 @@ function Home()
     
     const onSubmit = data => {
 
-        // console.log(data)
+        console.log(data)
 
         dispatch(employeeActions.addEmployee(data))
     }
-
-    // useEffect(() => {
-
-        // addEmployee(data)
-
-    // },[])
 
     return (
         <>
@@ -53,57 +47,64 @@ function Home()
 
                 <form className='' action="" onSubmit={handleSubmit(onSubmit)}>
 
-                    <label htmlFor="first-name">First Name</label>
+                    <label htmlFor="FirstName">First Name</label>
                     <input
                         type="text"
-                        id="first-name"
-                        {...register("first-name", { required: "Please enter your first name." })}
+                        id="FirstName"
+                        {...register("FirstName", { required: "Please enter your first name." })}
                     />
 
-                    <label htmlFor="last-name">Last Name</label>
+                    <label htmlFor="LastName">Last Name</label>
                     <input
                         type="text"
-                        id="last-name"
-                        {...register("last-name", { required: "Please enter your last name." })}
+                        id="LastName"
+                        {...register("LastName", { required: "Please enter your last name." })}
                     />
 
-                    <label htmlFor="date-of-birth">Date of Birth</label>
-                    <ImputDate></ImputDate>
-                    <input
+                    {/* date of birth with datepicker component plugin */}
+                    <label htmlFor="BirthDate">Date of Birth</label>
+                    <div className='date-parent'>
+                        {/* composant */}
+                        <ImputDate param={{...register("BirthDate", { required: "Please enter your date of birth." })}}
+                            // {...register("BirthDate", { required: "Please enter your date of birth." })}
+                        ></ImputDate>
+                    </div>
+                
+                    {/* <input
                         type="date"
-                        id="date-of-birth"
-                        {...register("date-of-birth", { required: "Please enter your date of birth." })}
-                    />
+                        id="BirthDate"
+                        {...register("BirthDate", { required: "Please enter your date of birth." })}
+                    /> */}
 
-                    <label htmlFor="start-date">Start Date</label>
+                    <label htmlFor="StartDate">Start Date</label>
                     <input
                         type="date"
-                        id="start-date"
-                        {...register("start-name", { required: "Please enter your start date." })}
+                        id="StartDate"
+                        {...register("StartDate", { required: "Please enter your start date." })}
                     />
 
                     <fieldset className="address">
 
                         <legend>Address</legend>
 
-                        <label htmlFor="street">Street</label>
+                        <label htmlFor="Street">Street</label>
                         <input
                             type="text"
-                            id="street"
-                            {...register("street", { required: "Please enter your street." })}
+                            id="Street"
+                            {...register("Street", { required: "Please enter your street." })}
                         />
 
-                        <label htmlFor="city">City</label>
+                        <label htmlFor="City">City</label>
                         <input
                             type="text"
-                            id="city"
-                            {...register("city", { required: "Please enter your city." })}
+                            id="City"
+                            {...register("City", { required: "Please enter your city." })}
                         />
 
-                        <label htmlFor="state">State</label>
+                        <label htmlFor="State">State</label>
                         <select
-                            id="state"
-                            {...register("state", { required: "Please enter your state." })}
+                            id="State"
+                            {...register("State", { required: "Please enter your state." })}
                         >
                             {
                                 states.map((state) => (
@@ -114,19 +115,19 @@ function Home()
                             }
                         </select>
 
-                        <label htmlFor="zip-code">Zip Code</label>
+                        <label htmlFor="Zipcode">Zip Code</label>
                         <input
                             type="number"
-                            id="zip-code"
-                            {...register("zip-code", { required: "Please enter your zip-code." })}
+                            id="Zipcode"
+                            {...register("Zipcode", { required: "Please enter your zip-code." })}
                         />
 
                     </fieldset>
 
-                    <label htmlFor="department">Department</label>
+                    <label htmlFor="Department">Department</label>
                     <select
-                        id="department"
-                        {...register("department", { required: "Please enter your department." })}
+                        id="Department"
+                        {...register("Department", { required: "Please enter your department." })}
                     >
                         {
                             departments.map((department) => (

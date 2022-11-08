@@ -14,8 +14,6 @@ function EmployeeList()
 
     console.log(employees)
 
-
-
     // colones du tableau
     const columns = [
         { title: 'First Name', data: 'firstName' },
@@ -78,7 +76,7 @@ function EmployeeList()
                             {
                                 employees.map((employee, index) => (
                                     <tr key={index}>
-                                        <td>{employee["first-name"]}</td>
+                                        <td>{employee.FirstName}</td>
                                         <td>{employee.LastName}</td>
                                         <td>{employee.StartDate}</td>
                                         <td>{employee.Department}</td>
