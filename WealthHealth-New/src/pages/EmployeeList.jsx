@@ -36,8 +36,6 @@ function EmployeeList()
 
             </div>
 
-       
-
             <div className='employee-tab test'>
 
                 {/* div show number + search */}
