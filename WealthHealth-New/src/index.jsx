@@ -14,6 +14,7 @@ import Error from './pages/Error'
 import Header from './components/Header'
 
 import store from './redux/store'
+import { Suspense } from 'react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 

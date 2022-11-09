@@ -1,10 +1,13 @@
 // import react
 import React from 'react'
 
+import { useEffect } from 'react'
+
+// import redux
+import { useDispatch } from 'react-redux'
+
 // import useForm
 import { useForm } from 'react-hook-form'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 
 // import perso
 import '../design/App.scss'
@@ -13,13 +16,15 @@ import { mockedList } from '../datas/datas.js'
 import { employeeActions } from '../redux/employeeListSlice'
 import { states, departments } from '../datas/datas.js'
 
+// plugin
+import Calendar from '../components/DatePicker.jsx'
+
 // composents
-import ImputDate from '../components/DatePicker.jsx'
 import Dropdown from '../components/Dropdown.jsx'
 
 function Home()
 {
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit } = useForm()
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -37,6 +42,7 @@ function Home()
 
     return (
         <>
+
             <div className="page-header">
         
                 <h1>Home</h1>
@@ -63,13 +69,15 @@ function Home()
 
                     {/* date of birth with datepicker component plugin */}
                     <label htmlFor="BirthDate">Date of Birth</label>
-                    <div className='date-parent'>
-                        {/* composant */}
-                        <ImputDate param={{...register("BirthDate", { required: "Please enter your date of birth." })}}
-                            // {...register("BirthDate", { required: "Please enter your date of birth." })}
-                        ></ImputDate>
-                    </div>
-                
+                    {/* composant */}
+                    <Calendar
+
+                        label={'BirthDate'}
+                        name="BirthDate"
+
+                        // {...register("BirthDate", { required: "Please enter your date of birth." })}
+                    ></Calendar>
+                 
                     {/* <input
                         type="date"
                         id="BirthDate"
@@ -106,6 +114,14 @@ function Home()
                             id="State"
                             {...register("State", { required: "Please enter your state." })}
                         >
+                            {/* 1er onglet non selectionnable */}
+                            <option
+                                disabled
+                                selected
+                                defaultValue="Select a State" >
+                                    - Select a State -
+                            </option>
+                            {/* liste des états */}
                             {
                                 states.map((state) => (
                                     <option value={state.name} key={state.name}>
@@ -143,7 +159,7 @@ function Home()
                 </form>
 
             </div>
-
+    
         </>
     )
 }

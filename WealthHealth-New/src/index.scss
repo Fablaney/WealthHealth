@@ -38,8 +38,12 @@ a
 // {
 //     align-items: flex-end !important;
 // }
-.date-parent
+.date-parent, .calendar
 {
+    label
+    {
+        color: black;
+    }
     background-color: white;
     border-radius: 8px;
     padding: 0;
@@ -74,4 +78,11 @@ a
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding-left: 1em !important;
+}
+.react-datepicker__input-container
+{
+    input
+    {
+        margin-bottom: 0 !important;
+    }
 }

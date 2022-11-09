@@ -8,11 +8,11 @@ import { useSelector } from 'react-redux'
 function EmployeeList()
 {
     const employees = useSelector(state => {
-        console.log(state.employeesList.employees)
+        // console.log(state.employeesList.employees)
         return state.employeesList.employees
     })
 
-    console.log(employees)
+    // console.log(employees)
 
     // colones du tableau
     const columns = [
