@@ -4,7 +4,6 @@ import "../design/employee-tab.scss"
 import { mockedList } from '../datas/datas'
 import { useSelector } from 'react-redux'
 
-
 function EmployeeList()
 {
     const employees = useSelector(state => {
@@ -36,7 +35,9 @@ function EmployeeList()
                 <h1>Employee List</h1>
 
             </div>
-            
+
+       
+
             <div className='employee-tab test'>
 
                 {/* div show number + search */}
