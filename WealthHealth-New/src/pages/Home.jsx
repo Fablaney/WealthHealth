@@ -25,7 +25,8 @@ import Dropdown from '../components/Dropdown.jsx'
 
 function Home()
 {
-    const {register, handleSubmit } = useForm()
+    // const {register, handleSubmit } = useForm()
+    const { register, handleSubmit, setValue } = useForm();
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -71,14 +72,14 @@ function Home()
                     {/* date of birth with datepicker component plugin */}
                     <label htmlFor="BirthDate">Date of Birth</label>
                     {/* composant */}
-                    <Calendar
+                    {/* <Calendar
 
                         label={'BirthDate'}
                         name="BirthDate"
 
-                        // {...register("BirthDate", { required: "Please enter your date of birth." })}
-                    ></Calendar>
-                 
+                        {...register("BirthDate", { required: "Please enter your date of birth." })}
+                    ></Calendar> */}
+                    <Calendar setValue={setValue} label={'BirthDate'} name="birthdate" />
                     {/* <input
                         type="date"
                         id="BirthDate"
@@ -86,11 +87,12 @@ function Home()
                     /> */}
 
                     <label htmlFor="StartDate">Start Date</label>
-                    <input
+                    <Calendar setValue={setValue} label={'StartDate'} name="StartDate" />
+                    {/* <input
                         type="date"
                         id="StartDate"
                         {...register("StartDate", { required: "Please enter your start date." })}
-                    />
+                    /> */}
 
                     <fieldset className="address">
 

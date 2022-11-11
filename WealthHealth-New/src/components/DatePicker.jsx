@@ -7,18 +7,18 @@ import getYear from "date-fns/getYear"
 import getMonth from "date-fns/getMonth"
 import range from "lodash.range"
 
-function Calendar(param)
+export default function Calendar({ setValue, label, name })
 {
-    // console.log(param)
-    const [SelectedDate, setSelectedDate] = useState(new Date())
+    const [selectedDate, setSelectedDate] = useState(new Date())
+
+    setValue(label, selectedDate.toLocaleDateString())
 
     const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
-        // <input className="custom-input-date" onClick={onClick} ref={ref} value={value}/>
-            
         <button className="custom-input-date" onClick={onClick} ref={ref}>
             {value}
         </button>
     ))
+    const input = document.getElementsByClassName('calendar-datepicker')
 
     const years = range(1970, getYear(new Date()) + 10, 1)
 
@@ -37,10 +37,16 @@ function Calendar(param)
         "December",
     ]
 
+    for (let i of input)
+    {
+        i.setAttribute('aria-labelledBy', `"${name}"`)
+        console.log(i)
+    }
+
     return (
         <div className="calendar">
+           
             <DatePicker
-            
                 renderCustomHeader={({
                 date,
                 changeYear,
@@ -56,7 +62,7 @@ function Calendar(param)
                             display: "flex",
                             justifyContent: "center",
                         }}
-                        >
+                    >
     
                         <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
                             {"<"}
@@ -93,15 +99,25 @@ function Calendar(param)
                     </div>
                 )}
 
-                selected={SelectedDate}
-                onChange={(date) => setSelectedDate(date)}
                 customInput={<ExampleCustomInput />}
                 withPortal
                 fixedHeight
-                dateFormat="dd/MM/yyyy"
-
+                dateFormat="dd/MM/yyyy"     
+                id={name}
+                name={name}
+                aria-label={name}
+                // className="calendar-datepicker"
+                selected={selectedDate}
+                slotInfo={false}
+                onChange={(date) => {
+                    setSelectedDate(date);
+                }}
+                onSelect={(e) => {
+                    setSelectedDate(e);
+                    setValue(label, e.toLocaleDateString());
+                }}
             />
-        </div>    
+
+        </div>
     )
-}
-export default Calendar
+}  
