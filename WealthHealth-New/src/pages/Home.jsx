@@ -19,14 +19,14 @@ import Calendar from '../components/DatePicker.jsx'
 
 // composents
 import Dropdown from '../components/Dropdown.jsx'
-import Select from '../components/Select'
+
 
 function Home()
 {
     // const {register, handleSubmit } = useForm()
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch()
-    // console.log(watch("FirstName"));
+
     useEffect(()=>{
         
         dispatch(employeeActions.getEmployees(mockedList))
@@ -57,8 +57,9 @@ function Home()
                     <input
                         type="text"
                         id="FirstName"
-                        {...register("FirstName", { required: "Please enter your first name." })}
+                        {...register("FirstName", { required: true }, { pattern: /^[A-Za-z]+$/i })}
                     />
+                    {errors.FirstName && <span className='error-msg'>Please enter your first name.</span>}
 
                     <label htmlFor="LastName">Last Name</label>
                     <input
@@ -118,21 +119,18 @@ function Home()
                         {errors.City && <span className='error-msg'>Please enter your city.</span>}
 
                         <label htmlFor="State">State</label>
-                        <select
-                            id="State"
-                            {...register("State", { required: "Please enter your state." })}
-                        >
-                            {/* 1er onglet non selectionnable */}
-                            <option
-                                disabled
-                                selected
-                                defaultValue="Select a State" >
-                                    - Select a State -
-                            </option>
-                            {/* liste des états */}
-                            {
-                                states.map((state) => (
-                                    <option value={state.name} key={state.name}>
+                        <input
+                            type="text"
+                            id='State'
+                            list='State-list'
+                            placeholder='Choose a State'
+                            name='State'
+                            {...register("State", { required: true })}
+                        />
+                        <datalist id='State-list'>
+                        {
+                                states.map((state, index) => (
+                                    <option value={state.name} key={index}>
                                         {state.abbreviation} - {state.name}
                                     </option>
                                 ))
