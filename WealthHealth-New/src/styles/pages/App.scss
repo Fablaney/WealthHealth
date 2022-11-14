@@ -35,10 +35,15 @@ a
 
 .page-header
 {
+    
     display: flex;
     justify-content: center;
     font-size: 2em;
     color: white;
     text-shadow: rgb(192, 38, 159) 6px 6px 6px;
-    // color: #282c34;
+}
+h1
+{
+    font-family: 'Oooh Baby';
+    transform: rotate(-10deg);
 }

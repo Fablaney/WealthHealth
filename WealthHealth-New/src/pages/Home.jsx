@@ -1,7 +1,7 @@
 // import react
 import React from 'react'
-
 import { useEffect } from 'react'
+import { useState } from 'react'
 
 // import redux
 import { useDispatch } from 'react-redux'
@@ -18,13 +18,11 @@ import { states, departments } from '../datas/datas.js'
 import Calendar from '../components/DatePicker.jsx'
 
 // composents
-import Dropdown from '../components/Dropdown.jsx'
-
+import Modale from '../components/Modal.jsx'
 
 function Home()
 {
-    // const {register, handleSubmit } = useForm()
-    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -35,9 +33,12 @@ function Home()
     
     const onSubmit = data => {
 
+        console.log("Nouvel employé ajouté")
         console.log(data)
 
         dispatch(employeeActions.addEmployee(data))
+
+        document.querySelector(".modale").classList.remove("d-none")
     }
 
     return (
@@ -152,9 +153,12 @@ function Home()
                     <button>Save</button>
 
                 </form>
-
+  
             </div>
-    
+
+            {/* composant/plugin modale */}
+            <Modale>A new employee has been created</Modale> 
+
         </>
     )
 }
