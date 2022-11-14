@@ -13,7 +13,9 @@
         align-items: center;
 
         background-color: rgba(44, 40, 70, 0.5);
-        border: 4px white solid;
+        // border: 4px white solid;
+        border: rgb(192, 38, 159) 4px solid;
+        box-shadow: black 0em 0em 2em, inset 0em 0em 1em rgb(207, 32, 193);
         border-radius: 0 2em;
         width: 600px;
         padding: 3em;
@@ -23,6 +25,7 @@
         {
             width: 100%;
             margin-bottom: 0.5em;
+            text-shadow: black 2px 2px 0;
         }
 
         input, option
@@ -52,22 +55,45 @@
             margin-bottom: 1em;
             display: flex;
             flex-direction: column;
+            box-shadow: black 0em 0em 2em;
         }
-
+        
         select
         {
             width: 100%;
             margin-bottom: 1em;
-        }
-
+        } 
+        
         button
         {
             border: none;
             border-radius: 8px;
-
             padding: 1em 2em;
             margin-top: 1em;
             margin-bottom: 1em;
         }
     }
+}
+.error-msg
+{
+    width: 100%;
+    margin-bottom: 0.5em;
+    color: rgb(243, 51, 201);
+    color: red;
+    text-shadow: black 2px 2px 0;
+}
+
+.error-msg
+{
+    animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce
+{
+    60% { transform:translateY(0%); }
+    70% { transform:translateY(-20%); }
+    80% { transform:translateY(15%); }
+    90% { transform:translateY(-10%); }
+    95% { transform:translateY(5%); }
+    99% { transform:translateY(-2%); }
+    100% { transform:translateY(0); }
 }

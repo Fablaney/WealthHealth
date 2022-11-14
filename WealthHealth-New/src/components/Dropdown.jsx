@@ -1,4 +1,3 @@
-import "../design/dropdown.scss"
 import { useState } from "react"
 
 function Dropdown({title, icon, children})

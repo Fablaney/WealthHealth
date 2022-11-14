@@ -1,6 +1,3 @@
-import '../design/App.scss'
-import "../design/employee-tab.scss"
-
 import { mockedList } from '../datas/datas'
 import { useSelector } from 'react-redux'
 
@@ -36,7 +33,7 @@ function EmployeeList()
 
             </div>
 
-            <div className='employee-tab test'>
+            <div className='employee-tab'>
 
                 {/* div show number + search */}
                 <div className='show-search'>

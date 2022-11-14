@@ -1,4 +1,3 @@
-import '../design/App.scss'
 
 function Error()
 {

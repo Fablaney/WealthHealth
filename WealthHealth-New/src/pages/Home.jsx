@@ -10,8 +10,6 @@ import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 // import perso
-import '../design/App.scss'
-import '../design/form-block.scss'
 import { mockedList } from '../datas/datas.js'
 import { employeeActions } from '../redux/employeeListSlice'
 import { states, departments } from '../datas/datas.js'
@@ -26,7 +24,7 @@ import Dropdown from '../components/Dropdown.jsx'
 function Home()
 {
     // const {register, handleSubmit } = useForm()
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -59,40 +57,46 @@ function Home()
                     <input
                         type="text"
                         id="FirstName"
-                        {...register("FirstName", { required: "Please enter your first name." })}
+                        {...register("FirstName", { required: true }, { pattern: /^[A-Za-z]+$/i })}
                     />
+                    {errors.FirstName && <span className='error-msg'>Please enter your first name.</span>}
 
                     <label htmlFor="LastName">Last Name</label>
                     <input
                         type="text"
                         id="LastName"
-                        {...register("LastName", { required: "Please enter your last name." })}
+                        {...register("LastName", { required: true }, { pattern: /^[A-Za-z]+$/i })}
                     />
+                    {errors.LastName && <span className='error-msg'>Please enter your last name.</span>}
 
                     {/* date of birth with datepicker component plugin */}
                     <label htmlFor="BirthDate">Date of Birth</label>
                     {/* composant */}
-                    {/* <Calendar
-
-                        label={'BirthDate'}
-                        name="BirthDate"
-
-                        {...register("BirthDate", { required: "Please enter your date of birth." })}
-                    ></Calendar> */}
                     <Calendar setValue={setValue} label={'BirthDate'} name="birthdate" />
-                    {/* <input
-                        type="date"
-                        id="BirthDate"
-                        {...register("BirthDate", { required: "Please enter your date of birth." })}
-                    /> */}
-
+        
                     <label htmlFor="StartDate">Start Date</label>
+                    {/* composant */}
                     <Calendar setValue={setValue} label={'StartDate'} name="StartDate" />
-                    {/* <input
-                        type="date"
-                        id="StartDate"
-                        {...register("StartDate", { required: "Please enter your start date." })}
-                    /> */}
+
+                    <label htmlFor="Department">Department</label>
+                    <input
+                        type="text"
+                        id='Department'
+                        list='Department-list'
+                        placeholder='Choose a Department'
+                        name='Department'
+                        {...register('Department', {required: true}, )}
+                    />
+                    <datalist className='test' id='Department-list'>
+                        {
+                            departments.map((department, index) => (
+                                <option value={department.name} key={index}>
+                                    {department.name}
+                                </option>
+                            ))
+                        }
+                    </datalist>
+                    {errors.Department && <span className='error-msg'>Please choose a department.</span>}
 
                     <fieldset className="address">
 
@@ -102,60 +106,48 @@ function Home()
                         <input
                             type="text"
                             id="Street"
-                            {...register("Street", { required: "Please enter your street." })}
+                            {...register("Street", { required: true })}
                         />
-
+                        {errors.Street && <span className='error-msg'>Please enter your street.</span>}
                         <label htmlFor="City">City</label>
+
                         <input
                             type="text"
                             id="City"
-                            {...register("City", { required: "Please enter your city." })}
+                            {...register("City", { required: true })}
                         />
+                        {errors.City && <span className='error-msg'>Please enter your city.</span>}
 
                         <label htmlFor="State">State</label>
-                        <select
-                            id="State"
-                            {...register("State", { required: "Please enter your state." })}
-                        >
-                            {/* 1er onglet non selectionnable */}
-                            <option
-                                disabled
-                                selected
-                                defaultValue="Select a State" >
-                                    - Select a State -
-                            </option>
-                            {/* liste des états */}
-                            {
-                                states.map((state) => (
-                                    <option value={state.name} key={state.name}>
+                        <input
+                            type="text"
+                            id='State'
+                            list='State-list'
+                            placeholder='Choose a State'
+                            name='State'
+                            {...register("State", { required: true })}
+                        />
+                        <datalist id='State-list'>
+                        {
+                                states.map((state, index) => (
+                                    <option value={state.name} key={index}>
                                         {state.abbreviation} - {state.name}
                                     </option>
                                 ))
                             }
-                        </select>
+                        </datalist>
+                        
+                        {errors.State && <span className='error-msg'>Please enter your state.</span>}
 
                         <label htmlFor="Zipcode">Zip Code</label>
                         <input
                             type="number"
                             id="Zipcode"
-                            {...register("Zipcode", { required: "Please enter your zip-code." })}
+                            {...register("Zipcode", { required: true }, { min: 1000, max: 99999 })}
                         />
+                        {errors.Zipcode && <span className='error-msg'>Please enter your zip-code.</span>}
 
                     </fieldset>
-
-                    <label htmlFor="Department">Department</label>
-                    <select
-                        id="Department"
-                        {...register("Department", { required: "Please enter your department." })}
-                    >
-                        {
-                            departments.map((department) => (
-                                <option value={department.name} key={department.name}>
-                                    {department.name}
-                                </option>
-                            ))
-                        }
-                    </select>
 
                     <button>Save</button>
 

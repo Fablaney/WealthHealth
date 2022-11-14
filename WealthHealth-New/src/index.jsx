@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 
 // Import perso
 // CSS
-import './index.scss'
+import './styles/index.scss'
 // pages
 import Home from './pages/Home'
 import EmployeeList from './pages/EmployeeList'

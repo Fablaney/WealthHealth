@@ -3,9 +3,8 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 // import perso
-// import Logo from "../assets/logoWH.jpg"
-import Logo from "../assets/logo-HRNet.svg"
-import "../design/header.scss"
+import Logo from "../assets/logo-HRNet-neon.svg"
+
 /**
  * @component
  * @description Render of the Header
