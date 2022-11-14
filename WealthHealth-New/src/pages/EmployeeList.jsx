@@ -8,6 +8,8 @@ function EmployeeList()
         return state.employeesList.employees
     })
 
+    // faire un state local pour le filtrage des employés
+    
     // console.log(employees)
 
     // colones du tableau
