@@ -18,7 +18,6 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "sass": "^1.55.0",
-    "table-react-component-library": "^1.0.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

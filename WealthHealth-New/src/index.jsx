@@ -1,7 +1,12 @@
+// import React
 import React from 'react'
+import { Suspense } from 'react'
+
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import { Provider } from 'react-redux'
+
 
 // Import perso
 // CSS
@@ -11,10 +16,11 @@ import Home from './pages/Home'
 import EmployeeList from './pages/EmployeeList'
 import Error from './pages/Error'
 
+// components
 import Header from './components/Header'
 
+// store
 import store from './redux/store'
-import { Suspense } from 'react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
@@ -33,6 +39,6 @@ root.render(
             </Routes>
 
         </BrowserRouter>
-
+    
     </Provider>
 )

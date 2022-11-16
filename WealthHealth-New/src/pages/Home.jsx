@@ -150,7 +150,7 @@ function Home()
 
                     </fieldset>
 
-                    <button>Save</button>
+                    <button className='save-button'>Save</button>
 
                 </form>
   

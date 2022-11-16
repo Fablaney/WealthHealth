@@ -11,7 +11,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
+        backdrop-filter: blur(6.2px);
         background-color: rgba(44, 40, 70, 0.5);
         border: rgb(192, 38, 159) 4px solid;
         box-shadow: black 0em 0em 2em, inset 0em 0em 1em rgb(207, 32, 193);
@@ -71,6 +71,37 @@
             margin-top: 1em;
             margin-bottom: 1em;
         }
+
+        .save-button
+        {
+            font-family: 'Oooh Baby';
+            transform: rotate(0deg);
+            transition: all ease-in-out 0.3s;
+            transform: scale(1);
+            padding: 1em 3em;
+            font-weight: 700;
+            font-size: 20px;
+
+            &:hover
+            {
+                background-color: $violet;
+                color: white;
+                text-shadow: black 2px 2px 2px;
+                box-shadow: rgb(0, 255, 255) 0.5em 0.5em 1em;
+                font-size: 24px;
+                transform: scale(1.2);
+                transform: rotate(-10deg);
+                animation: hithere 1s ease infinite;
+            } 
+          
+            @keyframes hithere {
+                30% { transform: scale(1.2); }
+                40%, 60% { transform: rotate(-10deg) scale(1.2); }
+                50% { transform: rotate(10deg) scale(1.2); }
+                70% { transform: rotate(0deg) scale(1.2); }
+                100% { transform: scale(1); }
+            }
+        }
     }
 }
 .error-msg
@@ -80,12 +111,9 @@
     color: rgb(243, 51, 201);
     color: red;
     text-shadow: black 2px 2px 0;
-}
-
-.error-msg
-{
     animation: bounce 2s ease-in-out infinite;
 }
+
 @keyframes bounce
 {
     60% { transform:translateY(0%); }
