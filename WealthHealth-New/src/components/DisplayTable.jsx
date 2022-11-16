@@ -70,6 +70,7 @@ function DisplayTable( {
 
     const totalPages = Math.ceil(count / rowsPerPage)
   
+    // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
         setActivePage(1)
     
@@ -90,7 +91,7 @@ function DisplayTable( {
             })
         }
     }
-  
+    // tri par titre de colonne
     const handleSort = (title) => {
         setActivePage(1)
         setSort((prevSort) => ({
@@ -99,24 +100,25 @@ function DisplayTable( {
         }))
     }
 
-    const handleEntries = (numberEntries) => {
-        // console.log(numberEntries)
-        let entries = numberEntries
-
-        setRowsPerPage(entries)
-    }
-
+    // reset tous les filtres
     const clearAll = () => {
         setSort({ order: 'asc', orderBy: 'id' })
         setActivePage(1)
         setFilters({})
     }
 
+    // affiche XX lignes par page
+    const handleEntries = (numberEntries) => {
+        // console.log(numberEntries)
+        let entries = numberEntries
+        clearAll()
+        setRowsPerPage(entries)
+    }
 
 
     return (
         <>
-        <div className='show-search test'>
+        <div className='show-search'>
             {/* show number */}
             <div className='show'>
                 Show
@@ -130,7 +132,7 @@ function DisplayTable( {
             
         </div>
 
-        <table className="table test">
+        <table className="table">
             <thead>
 
                 <tr>
@@ -171,7 +173,7 @@ function DisplayTable( {
                         <input
                             key={`${column.title}-search`}
                             type="search"
-                            placeholder={`Search ${column.title}`}
+                            placeholder={`${column.title}`}
                             value={filters[column.title]}
                             onChange={(event) => handleSearch(event.target.value, column.title)}
                         />

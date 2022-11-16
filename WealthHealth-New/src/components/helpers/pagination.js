@@ -8,7 +8,7 @@ export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActi
   
     return (
         <>
-            <div className="pagination test">
+            <div className="pagination">
 
                 <p>
                     Page {activePage} of {totalPages}

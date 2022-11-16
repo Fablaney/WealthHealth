@@ -7,13 +7,16 @@
     margin: auto;
     width: 80%;
     border-radius: 0 2em;
-    border: $violet 4px solid;
-    box-shadow: black 0em 0em 2em, inset 0em 0em 1em rgb(207, 32, 193);
+    border: $violet 2px solid;
+    border-radius: 0 2em;
+    box-shadow: black 0em 0em 2em, inset 0em 0em 2em rgb(207, 32, 193);
     color: white;
     padding: 5%;
     margin-bottom: 5%;
     backdrop-filter: blur(6.2px);
+
 }
+// 1 zone ligne par page
 .show-search
 {
     width: 100%;
@@ -21,15 +24,50 @@
     justify-content: space-between;
     margin-bottom: 3em;
 }
+// tableau
 .table
 {
     width: 100%;
     margin-bottom: 3em;
+
+    thead
+    {
+        tr
+        {
+            th
+            {
+                text-align: center;
+                input
+                {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    tbody
+    {
+        text-align: center;
+    }
 }
-.count-next-prev
+// pagination
+.pagination
 {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 3em;
+    align-items: center;
+
+    .buttons-next-prev
+    {
+        button
+        {
+            margin: 1em;
+        }
+    }
+
+    .reverse
+    {
+        transform: rotate(180deg);
+    }
 }
