@@ -1,27 +1,26 @@
 // import react
 import { useState, useMemo } from "react"
-import { useEffect } from "react"
 import { sortRows } from "./helpers/helpers"
 import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
 import { Pagination } from "./helpers/pagination"
 
-import { mockedList } from "../datas/datas"
-
-function DisplayTable( { 
-    columns,
-    // rows 
-    } )
+function DisplayTable( { columns, rows } )
 {
-
-    const rows = mockedList
+    // console.log("columns")
+    // console.log(columns)
+    console.log("j'arrive dans le composant et j'affiche rows")
+    console.log(rows)
+    // let rows = mockedList
 
     // j'instancie un id via l'index au moment ou je récupere le tableau
-    rows.map((row, index) => {
-        let id = { id: index+1}
-        Object.assign(row, id)
-        // console.log(row)
-    })
+    // rows.map((row, index) => {
+    //     console.log("j'ajoute l'id à row")
+    //     let id = { id: index+1 }
+    //     Object.assign(row, id)
+        
+    //     console.log(row)
+    // })
 
     // const rows = [
     //     {
@@ -49,16 +48,14 @@ function DisplayTable( {
     // ]
 
 
-    
-
-    
 
     const [activePage, setActivePage] = useState(1)
 
     const [filters, setFilters] = useState({})
 
     const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
-    let [rowsPerPage, setRowsPerPage] = useState(10) 
+    
+    const [rowsPerPage, setRowsPerPage] = useState(10) 
   
     const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
@@ -84,13 +81,17 @@ function DisplayTable( {
         else
         {
             setFilters((prevFilters) => {
+
                 const updatedFilters = { ...prevFilters }
+
                 delete updatedFilters[title]
         
                 return updatedFilters
+
             })
         }
     }
+
     // tri par titre de colonne
     const handleSort = (title) => {
         setActivePage(1)
@@ -105,6 +106,7 @@ function DisplayTable( {
         setSort({ order: 'asc', orderBy: 'id' })
         setActivePage(1)
         setFilters({})
+        setRowsPerPage(10)
     }
 
     // affiche XX lignes par page
@@ -138,6 +140,7 @@ function DisplayTable( {
                 <tr>
                     {columns.map((column) => {
                         const sortIcon = () => {
+
                             if (column.title === sort.orderBy)
                             {
                                 if (sort.order === 'asc')
@@ -154,6 +157,7 @@ function DisplayTable( {
                                 return <i className="fa-solid fa-sort"></i>
                             }
                         }
+
                         return (
                             <th key={column.title}>
 
@@ -163,6 +167,7 @@ function DisplayTable( {
 
                             </th>
                         )
+
                     })}
                 </tr>
 
@@ -198,7 +203,8 @@ function DisplayTable( {
                     // console.log(row.id)
 
                     return (
-                        <tr key={row.id} >
+                        // <tr key={row.id} >
+                            <tr key={index} >
                             {columns.map((column) => {
                                 // console.log("column")
                                 // console.log(column)

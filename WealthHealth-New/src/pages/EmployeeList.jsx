@@ -1,10 +1,11 @@
 // import React
-import React from 'react';
+import React, { Suspense } from 'react';
 import { lazy } from 'react';
 import { useSelector } from 'react-redux'
 
 // import perso
-import DisplayTable from '../components/DisplayTable'
+// import DisplayTable from '../components/DisplayTable'
+const DisplayTable = lazy(() => import('../components/DisplayTable'));
 
 // import perso
 function EmployeeList()
@@ -15,6 +16,31 @@ function EmployeeList()
         return state.employeesList.employees
     })
 
+    // console.log(employees)
+    // const employees = [
+    //     {
+    //         FirstName: 'Julie',
+    //         LastName: 'Perarnau',
+    //         BirthDate: '07/08/1989',
+    //         StartDate: '01/09/1992',
+    //         Street: '7 Route de Dammartin',
+    //         City: 'Eugene',
+    //         State: 'OR',
+    //         Zipcode: '0123',
+    //         Department: 'Marketing'
+    //     },
+    //     {
+    //         FirstName: 'Claire',
+    //         LastName: 'Bertrand',
+    //         BirthDate: '07/08/1959',
+    //         StartDate: '01/09/2020',
+    //         Street: 'A Great Road',
+    //         City: 'El Paso',
+    //         State: 'TX',
+    //         Zipcode: '9876',
+    //         Department: 'Sales'
+    //     },
+    // ]
     // console.log(employees)
 
     // colones du tableau
@@ -39,8 +65,12 @@ function EmployeeList()
             </div>
 
             <div className='employee-tab'>
-                
-                <DisplayTable columns={columns} rows={employees}></DisplayTable>
+
+                <Suspense fallback={<div>Loading...</div>}>
+
+                    <DisplayTable columns={columns} rows={employees}></DisplayTable>
+
+                </Suspense>
 
             </div>
         </>

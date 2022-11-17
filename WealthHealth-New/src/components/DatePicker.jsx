@@ -18,6 +18,7 @@ export default function Calendar({ setValue, label, name })
             {value}
         </button>
     ))
+
     const input = document.getElementsByClassName('calendar-datepicker')
 
     const years = range(1970, getYear(new Date()) + 10, 1)

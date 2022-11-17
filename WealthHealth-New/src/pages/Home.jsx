@@ -10,9 +10,8 @@ import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 // import perso
-import { mockedList } from '../datas/datas.js'
+import { mockedList, states, departments } from '../datas/datas.js'
 import { employeeActions } from '../redux/employeeListSlice'
-import { states, departments } from '../datas/datas.js'
 
 // plugin
 import Calendar from '../components/DatePicker.jsx'
