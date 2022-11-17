@@ -1,7 +1,7 @@
 // import React
 import React, { Suspense, lazy } from 'react'
 import { useSelector } from 'react-redux'
-
+import { mockedList} from '../datas/datas.js'
 // import perso
 // import DisplayTable from '../components/DisplayTable'
 const DisplayTable = lazy(() => import('../components/DisplayTable'));
@@ -9,37 +9,16 @@ const DisplayTable = lazy(() => import('../components/DisplayTable'));
 // import perso
 function EmployeeList()
 {
+    // state
     // recuperation de la liste des employés du state
-    let employees = useSelector(state => {
+    // let employees = useSelector(state => {
         // console.log(state.employeesList.employees)
-        return state.employeesList.employees
-    })
+        // return state.employeesList.employees
+    // })
 
-    // console.log(employees)
-    // const employees = [
-    //     {
-    //         FirstName: 'Julie',
-    //         LastName: 'Perarnau',
-    //         BirthDate: '07/08/1989',
-    //         StartDate: '01/09/1992',
-    //         Street: '7 Route de Dammartin',
-    //         City: 'Eugene',
-    //         State: 'OR',
-    //         Zipcode: '0123',
-    //         Department: 'Marketing'
-    //     },
-    //     {
-    //         FirstName: 'Claire',
-    //         LastName: 'Bertrand',
-    //         BirthDate: '07/08/1959',
-    //         StartDate: '01/09/2020',
-    //         Street: 'A Great Road',
-    //         City: 'El Paso',
-    //         State: 'TX',
-    //         Zipcode: '9876',
-    //         Department: 'Sales'
-    //     },
-    // ]
+    // mockées
+    const employees = mockedList
+
     // console.log(employees)
 
     // colones du tableau

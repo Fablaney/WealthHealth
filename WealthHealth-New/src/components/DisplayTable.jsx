@@ -9,18 +9,18 @@ function DisplayTable( { columns, rows } )
 {
     // console.log("columns")
     // console.log(columns)
-    console.log("j'arrive dans le composant et j'affiche rows")
+    // console.log("j'arrive dans le composant et j'affiche rows")
     console.log(rows)
-    // let rows = mockedList
+
 
     // j'instancie un id via l'index au moment ou je récupere le tableau
-    // rows.map((row, index) => {
-    //     console.log("j'ajoute l'id à row")
-    //     let id = { id: index+1 }
-    //     Object.assign(row, id)
+    rows.map((row, index) => {
+        console.log("j'ajoute l'id à row")
+        let id = { id: index+1 }
+        Object.assign(row, id)
         
-    //     console.log(row)
-    // })
+        console.log(row)
+    })
 
     // const rows = [
     //     {

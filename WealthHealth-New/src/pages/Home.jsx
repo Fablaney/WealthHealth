@@ -1,7 +1,6 @@
 // import react
 import React from 'react'
 import { useEffect } from 'react'
-import { useState } from 'react'
 
 // import redux
 import { useDispatch } from 'react-redux'
