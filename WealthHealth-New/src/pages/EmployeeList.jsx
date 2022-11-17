@@ -1,6 +1,5 @@
 // import React
-import React, { Suspense } from 'react';
-import { lazy } from 'react';
+import React, { Suspense, lazy } from 'react'
 import { useSelector } from 'react-redux'
 
 // import perso
@@ -68,7 +67,7 @@ function EmployeeList()
 
                 <Suspense fallback={<div>Loading...</div>}>
 
-                    <DisplayTable columns={columns} rows={employees}></DisplayTable>
+                    <DisplayTable columns={columns} rows={employees} ></DisplayTable>
 
                 </Suspense>
 

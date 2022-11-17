@@ -117,7 +117,6 @@ function DisplayTable( { columns, rows } )
         setRowsPerPage(entries)
     }
 
-
     return (
         <>
         <div className='show-search'>
