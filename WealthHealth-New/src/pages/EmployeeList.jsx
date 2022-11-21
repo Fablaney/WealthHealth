@@ -3,23 +3,25 @@ import React, { Suspense, lazy } from 'react'
 import { useSelector } from 'react-redux'
 import { mockedList} from '../datas/datas.js'
 // import perso
-// import DisplayTable from '../components/DisplayTable'
-const DisplayTable = lazy(() => import('../components/DisplayTable'));
+import DisplayTable from '../components/DisplayTable'
+// const DisplayTable = lazy(() => import('../components/DisplayTable'));
 
 // import perso
 function EmployeeList()
 {
+    console.log("employee list")
     // state
     // recuperation de la liste des employés du state
-    // let employees = useSelector(state => {
+    let employees = useSelector(state => {
         // console.log(state.employeesList.employees)
-        // return state.employeesList.employees
-    // })
+        return state.employeesList.employees.length ? state.employeesList.employees : []
+    })
 
     // mockées
-    const employees = mockedList
+    // const employees = mockedList
 
-    // console.log(employees)
+
+    console.log(employees)
 
     // colones du tableau
     const columns = [
@@ -44,11 +46,11 @@ function EmployeeList()
 
             <div className='employee-tab'>
 
-                <Suspense fallback={<div>Loading...</div>}>
+                {/* <Suspense fallback={<div>Loading...</div>}> */}
 
                     <DisplayTable columns={columns} rows={employees} ></DisplayTable>
 
-                </Suspense>
+                {/* </Suspense> */}
 
             </div>
         </>

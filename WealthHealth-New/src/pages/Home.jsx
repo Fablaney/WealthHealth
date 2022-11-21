@@ -20,11 +20,14 @@ import Modale from '../components/Modal.jsx'
 
 function Home()
 {
+    
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const dispatch = useDispatch()
 
+    console.log("page home")
+
     useEffect(()=>{
-        
+
         dispatch(employeeActions.getEmployees(mockedList))
     
     }, [])

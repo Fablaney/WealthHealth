@@ -5,22 +5,25 @@ import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
 import { Pagination } from "./helpers/pagination"
 
-function DisplayTable( { columns, rows } )
+function DisplayTable( { 
+    columns,
+    rows
+ } )
 {
     // console.log("columns")
     // console.log(columns)
-    // console.log("j'arrive dans le composant et j'affiche rows")
-    console.log(rows)
+    console.log("j'arrive dans le composant et j'affiche rows")
+    // console.log(rows)
 
 
     // j'instancie un id via l'index au moment ou je récupere le tableau
-    rows.map((row, index) => {
-        console.log("j'ajoute l'id à row")
-        let id = { id: index+1 }
-        Object.assign(row, id)
+    // rows.map((row, index) => {
+    //     console.log("j'ajoute l'id à row")
+    //     let id = { id: index+1 }
+    //     Object.assign(row, id)
         
-        console.log(row)
-    })
+    //     console.log(row)
+    // })
 
     // const rows = [
     //     {
@@ -54,13 +57,16 @@ function DisplayTable( { columns, rows } )
     const [filters, setFilters] = useState({})
 
     const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
-    
+   
     const [rowsPerPage, setRowsPerPage] = useState(10) 
   
-    const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
+    // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
-    const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
+    // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
+    const filteredRows = filterRows(rows, filters)
 
+    const sortedRows = sortRows(filteredRows, sort)
+    console.log(sort)
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
   
     const count = filteredRows.length
@@ -202,8 +208,8 @@ function DisplayTable( { columns, rows } )
                     // console.log(row.id)
 
                     return (
-                        // <tr key={row.id} >
-                            <tr key={index} >
+                        <tr key={row.id} >
+                            {/* <tr key={index} > */}
                             {columns.map((column) => {
                                 // console.log("column")
                                 // console.log(column)
