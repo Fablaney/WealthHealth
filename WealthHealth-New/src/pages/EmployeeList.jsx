@@ -11,16 +11,15 @@ function EmployeeList()
 {
     // state
     // recuperation de la liste des employés du state
-    let employees = useSelector(state => {
+    const employees = useSelector(state => {
+        const noEmployees = { id: 0, FirstName: null, LastName: null, BirthDate: null, StartDate: null, Street: null, City: null, State: null, Zipcode: null, Department: null }
         // console.log(state.employeesList.employees)
-        return state.employeesList.employees.length ? state.employeesList.employees : []
+        return state.employeesList.employees.length ? state.employeesList.employees : noEmployees
     })
 
-    // mockées
-    // const employees = mockedList
+    console.log("employees")
+    console.log(employees)
 
-
-    // console.log(employees)
 
     // colones du tableau
     const columns = [

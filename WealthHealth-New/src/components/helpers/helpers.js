@@ -99,7 +99,8 @@ export function filterRows(rows, filters)
 export function sortRows(rows, sort)
 {
     console.log(rows)
-
+    console.log(sort)
+    
     return rows.sort((a,b) => {
         const { order, orderBy } = sort
     

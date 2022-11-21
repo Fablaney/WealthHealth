@@ -15,7 +15,6 @@ function DisplayTable( {
     // console.log("j'arrive dans le composant et j'affiche rows")
     // console.log(rows)
 
-
     // const rows = [
     //     {
     //         FirstName: 'Julie',
@@ -41,8 +40,6 @@ function DisplayTable( {
     //     },
     // ]
 
-
-
     const [activePage, setActivePage] = useState(1)
 
     const [filters, setFilters] = useState({})
@@ -51,21 +48,20 @@ function DisplayTable( {
    
     const [rowsPerPage, setRowsPerPage] = useState(10) 
   
-    // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
+    const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
-    // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
+    const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
 
-    const filteredRows = filterRows(rows, filters)
+    // const filteredRows = filterRows(rows, filters)
 
-    const sortedRows = sortRows(filteredRows, sort)
+    // const sortedRows = sortRows(filteredRows, sort)
 
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
   
     const count = filteredRows.length
 
     const totalPages = Math.ceil(count / rowsPerPage)
-  
-  
+
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
         setActivePage(1)
@@ -190,16 +186,6 @@ function DisplayTable( {
             <tbody>
                 {calculatedRows.map((row, index) => {
         
-                    // console.log("row")
-                    // console.log(row)
-
-
-                    // console.log("index")
-                    // console.log(index)
-
-                    // console.log("row.id")
-                    // console.log(row.id)
-
                     return (
                         <tr key={row.id} >
                             {/* <tr key={index} > */}
