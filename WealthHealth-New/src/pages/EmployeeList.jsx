@@ -16,10 +16,6 @@ function EmployeeList()
         return state.employeesList.employees.length ? state.employeesList.employees : []
     })
 
-    console.log("employees")
-    console.log(employees)
-
-
     // colones du tableau
     const columns = [
         { title: 'FirstName', label: 'First Name' },

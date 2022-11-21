@@ -98,10 +98,7 @@ export function filterRows(rows, filters)
   
 export function sortRows(rows, sort)
 {
-    console.log(rows)
-    console.log(sort)
-    
-    return rows.sort((a,b) => {
+    return rows.sort((a, b) => {
         const { order, orderBy } = sort
     
         if (isNil(a[orderBy])) return 1
