@@ -20,11 +20,8 @@ import Modale from '../components/Modal.jsx'
 
 function Home()
 {
-    
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const dispatch = useDispatch()
-
-    console.log("page home")
 
     useEffect(()=>{
 
@@ -34,8 +31,8 @@ function Home()
     
     const onSubmit = data => {
 
-        console.log("Nouvel employé ajouté")
-        console.log(data)
+        // console.log("Nouvel employé ajouté")
+        // console.log(data)
 
         dispatch(employeeActions.addEmployee(data))
 

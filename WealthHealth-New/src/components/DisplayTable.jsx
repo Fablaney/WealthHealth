@@ -12,18 +12,9 @@ function DisplayTable( {
 {
     // console.log("columns")
     // console.log(columns)
-    console.log("j'arrive dans le composant et j'affiche rows")
+    // console.log("j'arrive dans le composant et j'affiche rows")
     // console.log(rows)
 
-
-    // j'instancie un id via l'index au moment ou je récupere le tableau
-    // rows.map((row, index) => {
-    //     console.log("j'ajoute l'id à row")
-    //     let id = { id: index+1 }
-    //     Object.assign(row, id)
-        
-    //     console.log(row)
-    // })
 
     // const rows = [
     //     {
@@ -63,15 +54,17 @@ function DisplayTable( {
     // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
     // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
+
     const filteredRows = filterRows(rows, filters)
 
     const sortedRows = sortRows(filteredRows, sort)
-    console.log(sort)
+
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
   
     const count = filteredRows.length
 
     const totalPages = Math.ceil(count / rowsPerPage)
+  
   
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
