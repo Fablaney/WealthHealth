@@ -98,26 +98,48 @@ export function filterRows(rows, filters)
   
 export function sortRows(rows, sort)
 {
-    return rows.sort((a, b) => {
-        const { order, orderBy } = sort
-    
-        if (isNil(a[orderBy])) return 1
-        
-        if (isNil(b[orderBy])) return -1
-    
-        const aLocale = convertType(a[orderBy])
+    console.log(sort)
+    console.log(typeof(sort.orderBy))
 
-        const bLocale = convertType(b[orderBy])
+    if(sort.orderBy === "id")
+    {
+        rows.sort(
+            (a, b) => 
+            parseFloat(a.id)
+            - 
+            parseFloat(b.id)
+        )
+
+        return rows
+    }
+    else
+    {
+        return rows
+    }
     
-        if (order === 'asc')
-        {
-            return aLocale.localeCompare(bLocale, 'en', { numeric: isNumber(b[orderBy]) })
-        }
-        else
-        {
-            return bLocale.localeCompare(aLocale, 'en', { numeric: isNumber(a[orderBy]) })
-        }
-    })
+
+    // return rows
+    // // code origine
+    // return rows.sort((a, b) => {
+    //     const { order, orderBy } = sort
+    
+    //     if (isNil(a[orderBy])) return 1
+        
+    //     if (isNil(b[orderBy])) return -1
+    
+    //     const aLocale = convertType(a[orderBy])
+
+    //     const bLocale = convertType(b[orderBy])
+
+    //     if (order === 'asc')
+    //     {
+    //         return aLocale.localeCompare(bLocale, 'en', { numeric: isNumber(b[orderBy]) })
+    //     }
+    //     else
+    //     {
+    //         return bLocale.localeCompare(aLocale, 'en', { numeric: isNumber(a[orderBy]) })
+    //     }
+    // })
 }
   
 export function paginateRows(sortedRows, activePage, rowsPerPage)

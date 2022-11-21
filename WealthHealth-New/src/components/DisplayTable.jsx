@@ -48,13 +48,13 @@ function DisplayTable( {
    
     const [rowsPerPage, setRowsPerPage] = useState(10) 
   
-    const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
+    // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
-    const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
+    // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
 
-    // const filteredRows = filterRows(rows, filters)
+    const filteredRows = filterRows(rows, filters)
 
-    // const sortedRows = sortRows(filteredRows, sort)
+    const sortedRows = sortRows(filteredRows, sort)
 
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
   
@@ -166,26 +166,25 @@ function DisplayTable( {
                 </tr>
 
                 <tr>
-                {columns.map((column) => {
-                    return (
-                    <th>
-                        <input
-                            key={`${column.title}-search`}
-                            type="search"
-                            placeholder={`${column.title}`}
-                            value={filters[column.title]}
-                            onChange={(event) => handleSearch(event.target.value, column.title)}
-                        />
-                    </th>
-                    )
-                })}
+                    {columns.map((column) => {
+                        return (
+                        <th>
+                            <input
+                                key={`${column.title}-search`}
+                                type="search"
+                                placeholder={`${column.title}`}
+                                value={filters[column.title]}
+                                onChange={(event) => handleSearch(event.target.value, column.title)}
+                            />
+                        </th>
+                        )
+                    })}
                 </tr>
 
             </thead>
 
             <tbody>
                 {calculatedRows.map((row, index) => {
-        
                     return (
                         <tr key={row.id} >
                             {/* <tr key={index} > */}
