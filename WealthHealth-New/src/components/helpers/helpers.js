@@ -98,8 +98,8 @@ export function filterRows(rows, filters)
   
 export function sortRows(rows, sort)
 {
-    console.log(sort)
-    console.log(typeof(sort.orderBy))
+    // console.log(sort)
+    // console.log(typeof(sort.orderBy))
 
     if(sort.orderBy === "id")
     {
