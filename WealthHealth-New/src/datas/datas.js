@@ -256,14 +256,6 @@ const departments = [
 ]
 
 const mockedList = [
-    { id: 1, FirstName: 'Liz Lemon', age: 36, is_manager: true, StartDate: '02-28-1999' },
-    { id: 2, FirstName: 'Jack Donaghy', age: 40, is_manager: true, StartDate: '03-05-1997' },
-    { id: 3, FirstName: 'Tracy Morgan', age: 39, is_manager: false, StartDate: '07-12-2002' },
-    { id: 4, FirstName: 'Jenna Maroney', age: 40, is_manager: false, StartDate: '02-28-1999' },
-    { id: 5, FirstName: 'Kenneth Parcell', age: Infinity, is_manager: false, StartDate: '01-01-1970' },
-    { id: 6, FirstName: 'Pete Hornberger', age: 42, is_manager: true, StartDate: '04-01-2000' },
-    { id: 7, FirstName: 'Frank Rossitano', age: 36, is_manager: false, StartDate: '06-09-2004' },
-    
     {
         FirstName: 'Julie',
         LastName: 'Perarnau',

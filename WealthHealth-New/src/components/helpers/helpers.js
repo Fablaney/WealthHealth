@@ -97,9 +97,9 @@ export function filterRows(rows, filters)
 }
 
 
-export function sortTable(n)
+export function sortTable(param)
 {
-    console.log(n)
+    console.log(param)
 
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0
 
@@ -121,6 +121,8 @@ export function sortTable(n)
 
         rows = table.rows
 
+        console.log(rows)
+
         /*Loop through all table rows (except the
         first, which contains table headers):*/
         for (i = 1; i < (rows.length - 1); i++)
@@ -130,9 +132,9 @@ export function sortTable(n)
 
             /*Get the two elements you want to compare,
             one from current row and one from the next:*/
-            x = rows[i].getElementsByTagName("TD")[n]
+            x = rows[i].getElementsByTagName("TD")[param]
 
-            y = rows[i + 1].getElementsByTagName("TD")[n]
+            y = rows[i + 1].getElementsByTagName("TD")[param]
 
             /*check if the two rows should switch place,
             based on the direction, asc or desc:*/

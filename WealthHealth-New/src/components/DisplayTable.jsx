@@ -43,9 +43,9 @@ function DisplayTable( {
 
     const [activePage, setActivePage] = useState(1)
 
-    // const [filters, setFilters] = useState({})
+    const [filters, setFilters] = useState({})
 
-    // const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
+    const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
    
     const [rowsPerPage, setRowsPerPage] = useState(10) 
   
@@ -64,7 +64,7 @@ function DisplayTable( {
     const count = filteredRows.length
 
     const totalPages = Math.ceil(count / rowsPerPage)
-
+    
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
         setActivePage(1)
@@ -90,9 +90,10 @@ function DisplayTable( {
         }
     }
 
-
     // tri par titre de colonne
     const handleSort = (title) => {
+        sortTable(title)
+   
         setActivePage(1)
         setSort((prevSort) => ({
             order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
@@ -137,34 +138,34 @@ function DisplayTable( {
 
                 <tr>
                     {columns.map((column) => {
-                        // const sortIcon = () => {
+                        const sortIcon = () => {
 
-                        //     if (column.title === sort.orderBy)
-                        //     {
-                        //         if (sort.order === 'asc')
-                        //         {
-                        //             return <i className="fa-solid fa-caret-up"></i>
-                        //         }
-                        //         else
-                        //         {
-                        //             return <i className="fa-solid fa-caret-down"></i>
-                        //         }
-                        //     }
-                        //     else
-                        //     {
-                        //         return <i className="fa-solid fa-sort"></i>
-                        //     }
-                        // }
+                            // if (column.title === sort.orderBy)
+                            // {
+                            //     if (sort.order === 'asc')
+                            //     {
+                            //         return <i className="fa-solid fa-caret-up"></i>
+                            //     }
+                            //     else
+                            //     {
+                            //         return <i className="fa-solid fa-caret-down"></i>
+                            //     }
+                            // }
+                            // else
+                            // {
+                                return <i className="fa-solid fa-sort"></i>
+                            // }
+                        }
 
                         return (
                             <th key={column.title}>
 
                                 <span>{column.label}</span>
                                 &nbsp;
-                                <button onClick={sortTable(column.title)}>
-                                    {/* {sortIcon()} */}
-                                    {column.label}
-                                    </button>
+                                <button onClick={() => handleSort(column.title)}>
+                                    {sortIcon()}
+                                    {/* {column.label} */}
+                                </button>
 
                             </th>
                         )
@@ -191,25 +192,20 @@ function DisplayTable( {
             </thead>
 
             <tbody>
-                {calculatedRows.map((row, index) => {
-                    return (
-                        <tr key={row.id} >
-                            {/* <tr key={index} > */}
-                            {columns.map((column) => {
-                                // console.log("column")
-                                // console.log(column)
-                                // console.log("column.format")
-                                // console.log(column.format)
-                                // if (column.format)
-                                // {
-                                //     return <td key={column.title}>{column.format(row[column.title])}</td>
-                                // }
-                                // else
-                                // {
-                                    return <td key={column.title}>{row[column.title]}</td>
-                                // }
-                            })}
-                        </tr>
+                {
+                    rows.map((row, index) => {
+                        return (
+                            <tr key={index}> 
+                                <td>{row.FirstName}</td>
+                                <td>{row.LastName}</td>
+                                <td>{row.BirthDate}</td>
+                                <td>{row.StartDate}</td>
+                                <td>{row.Street}</td>
+                                <td>{row.City}</td>
+                                <td>{row.State}</td>
+                                <td>{row.Zipcode}</td>
+                                <td>{row.Department}</td>
+                            </tr>
                         )
                     })
                 }
