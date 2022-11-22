@@ -18,15 +18,15 @@ function EmployeeList()
 
     // colones du tableau
     const columns = [
-        { title: 'FirstName', label: 'First Name' },
-        { title: 'LastName', label: 'Last Name' },
-        { title: 'BirthDate', label: 'Birth Date' },
-        { title: 'StartDate', label: 'Start Date' },
-        { title: 'Street', label: 'Street' },
-        { title: 'City', label: 'City' },
-        { title: 'State', label: 'State' },
-        { title: 'Zipcode', label: 'Zip code' },
-        { title: 'Department', label: 'Department' },
+        { accessor: 'FirstName', Header: 'First Name'},
+        { accessor: 'LastName', Header: 'Last Name' },
+        { accessor: 'BirthDate', Header: 'Birth Date' },
+        { accessor: 'StartDate', Header: 'Start Date' },
+        { accessor: 'Street', Header: 'Street' },
+        { accessor: 'City', Header: 'City' },
+        { accessor: 'State', Header: 'State' },
+        { accessor: 'Zipcode', Header: 'Zip code' },
+        { accessor: 'Department', Header: 'Department' },
     ]
 
     return (
@@ -41,7 +41,7 @@ function EmployeeList()
 
                 <Suspense fallback={<div>Loading...</div>}>
 
-                    <DisplayTable columns={columns} rows={employees} ></DisplayTable>
+                    <DisplayTable colonnes={columns} lignes={employees} ></DisplayTable>
 
                 </Suspense>
 

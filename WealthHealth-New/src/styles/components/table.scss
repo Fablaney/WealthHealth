@@ -1,0 +1,21 @@
+.search-container
+{
+    margin-bottom: 3em;
+}
+.table
+{
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid red !important;
+}
+td, th
+{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+// tr:nth-child(even)
+// {
+//     background-color: #dddddd;
+// }

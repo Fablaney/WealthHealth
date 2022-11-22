@@ -1,241 +1,103 @@
-// import react
-import { useState, useMemo } from "react"
-import { sortRows } from "./helpers/helpers"
-import { filterRows } from "./helpers/helpers"
-import { paginateRows } from "./helpers/helpers"
-import { Pagination } from "./helpers/pagination"
+import { useTable, useSortBy } from "react-table"
+import { useMemo } from "react"
+import { useGlobalFilter } from 'react-table'
+import { useFilters } from 'react-table';
 
-function DisplayTable( { 
-    columns,
-    rows
- } )
+function DisplayTable({colonnes, lignes})
 {
-    // console.log("columns")
-    // console.log(columns)
-    // console.log("j'arrive dans le composant et j'affiche rows")
-    // console.log(rows)
+    console.log("j'entre dans react table")
+    // console.log(colonnes)
+    // console.log(lignes)
 
-    // const rows = [
-    //     {
-    //         FirstName: 'Julie',
-    //         LastName: 'Perarnau',
-    //         BirthDate: '07/08/1989',
-    //         StartDate: '01/09/1992',
-    //         Street: '7 Route de Dammartin',
-    //         City: 'Eugene',
-    //         State: 'OR',
-    //         Zipcode: '0123',
-    //         Department: 'Marketing'
-    //     },
-    //     {
-    //         FirstName: 'Claire',
-    //         LastName: 'Bertrand',
-    //         BirthDate: '07/08/1959',
-    //         StartDate: '01/09/2020',
-    //         Street: 'A Great Road',
-    //         City: 'El Paso',
-    //         State: 'TX',
-    //         Zipcode: '9876',
-    //         Department: 'Sales'
-    //     },
-    // ]
-
-    const [activePage, setActivePage] = useState(1)
-
-    const [filters, setFilters] = useState({})
-
-    const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
-   
-    const [rowsPerPage, setRowsPerPage] = useState(10) 
-  
-    // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
-
-    // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
-
-    const filteredRows = filterRows(rows, filters)
-
-    const sortedRows = sortRows(filteredRows, sort)
-
-    const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
-  
-    const count = filteredRows.length
-
-    const totalPages = Math.ceil(count / rowsPerPage)
-
-    // recherche par mot dans chaque colonne
-    const handleSearch = (value, title) => {
-        setActivePage(1)
+    const FilterForm = ({ column }) => {
+        const { filterValue, setFilter } = column;
+        return (
+            <span>
+                <input
+                    value={filterValue || ''}
+                    onChange={(e) => setFilter(e.target.value)}
+                />
+            </span>
+        );
+    };
     
-        if (value)
-        {
-            setFilters((prevFilters) => ({
-                ...prevFilters,
-                [title]: value,
-            }))
-        }
-        else
-        {
-            setFilters((prevFilters) => {
+    colonnes.forEach(element => {
+        const filtre = { Filter: FilterForm}
+        Object.assign(element, filtre);
+    })
 
-                const updatedFilters = { ...prevFilters }
+    const columns = useMemo(() => colonnes, [])
 
-                delete updatedFilters[title]
-        
-                return updatedFilters
+    const data = useMemo(() => lignes, [])
 
-            })
-        }
-    }
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        state,
+        setGlobalFilter,
+        prepareRow,
+    } = useTable({ columns, data }, useFilters, useGlobalFilter, useSortBy);
 
-    // tri par titre de colonne
-    const handleSort = (title) => {
-        setActivePage(1)
-        setSort((prevSort) => ({
-            order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
-            orderBy: title,
-        }))
-    }
+    const { globalFilter } = state;
 
-    // reset tous les filtres
-    const clearAll = () => {
-        setSort({ order: 'asc', orderBy: 'id' })
-        setActivePage(1)
-        setFilters({})
-        setRowsPerPage(10)
-    }
-
-    // affiche XX lignes par page
-    const handleEntries = (numberEntries) => {
-        // console.log(numberEntries)
-        let entries = numberEntries
-        clearAll()
-        setRowsPerPage(entries)
-    }
-
+ 
     return (
-        <>
-        <div className='show-search'>
-            {/* show number */}
-            <div className='show'>
-                Show
-                <select name="entries-number" onChange={(event) => handleEntries(event.target.value)}>
-                    <option>10</option>
-                    <option>25</option>
-                    <option>50</option>
-                    <option>100</option>
-                </select>
+        <div className="container">
+
+            <div className="search-container">
+                Search
+                &nbsp;
+                <input
+                    type="text"
+                    value={globalFilter || ''}
+                    onChange={(e) => setGlobalFilter(e.target.value)}
+                />
             </div>
-            
-        </div>
 
-        <table className="table">
-            <thead>
+            <table {...getTableProps()} className="table">
 
-                <tr>
-                    {columns.map((column) => {
-                        const sortIcon = () => {
+                <thead>
+                    {   
+                        headerGroups.map((headerGroup) => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    console.log(column)
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                        {column.render('Header')}
+                                        <span>
+                                            {column.isSorted
+                                                ? Column.isSortedDesc
+                                                    ?' 🔽'
+                                                    : '🔼'
+                                                :""}
+                                        </span>
+                                    </th>
+                                ))}
+                            </tr>
+                        ))
+                    }
+                </thead>
 
-                            if (column.title === sort.orderBy)
-                            {
-                                if (sort.order === 'asc')
-                                {
-                                    return <i className="fa-solid fa-caret-up"></i>
-                                }
-                                else
-                                {
-                                    return <i className="fa-solid fa-caret-down"></i>
-                                }
-                            }
-                            else
-                            {
-                                return <i className="fa-solid fa-sort"></i>
-                            }
-                        }
-
+                <tbody {...getTableBodyProps()}>
+                    {rows.map((row) => {
+                        prepareRow(row);
                         return (
-                            <th key={column.title}>
-
-                                <span>{column.label}</span>
-                                &nbsp;
-                                <button onClick={() => handleSort(column.title)}>{sortIcon()}</button>
-
-                            </th>
-                        )
-
+                            <tr {...row.getRowProps()}>
+                                {row.cells.map((cell) => {
+                                    return (
+                                        <td {...cell.getCellProps()}>
+                                            {cell.render('Cell')}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        );
                     })}
-                </tr>
-
-                <tr>
-                    {columns.map((column) => {
-                        return (
-                        <th>
-                            <input
-                                key={`${column.title}-search`}
-                                type="search"
-                                placeholder={`${column.title}`}
-                                value={filters[column.title]}
-                                onChange={(event) => handleSearch(event.target.value, column.title)}
-                            />
-                        </th>
-                        )
-                    })}
-                </tr>
-
-            </thead>
-
-            <tbody>
-                {calculatedRows.map((row, index) => {
-                    return (
-                        <tr key={row.id} >
-                            {/* <tr key={index} > */}
-                            {columns.map((column) => {
-                                // console.log("column")
-                                // console.log(column)
-                                // console.log("column.format")
-                                // console.log(column.format)
-                                if (column.format)
-                                {
-                                    return <td key={column.title}>{column.format(row[column.title])}</td>
-                                }
-                                else
-                                {
-                                    return <td key={column.title}>{row[column.title]}</td>
-                                }
-                            })}
-                        </tr>
-                        )
-                    })
-                }
-            </tbody>
-
-        </table>
-
-        {/* pagination */}
-        {count > 0 ?
-            (
-            <Pagination
-                activePage={activePage}
-                count={count}
-                rowsPerPage={rowsPerPage}
-                totalPages={totalPages}
-                setActivePage={setActivePage}
-            />
-            )
-            :
-            (
-                <p>No data found</p>
-            )
-        }
-
-        <div>
-
-            <p>
-                <button onClick={clearAll}>Clear all</button>
-            </p>
-            
+                </tbody>
+            </table>
         </div>
-
-        </>
     )
 }
 export default DisplayTable
