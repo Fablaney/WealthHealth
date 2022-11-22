@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useTable } from "react-table"
-import { useSortBy } from "react-table"
+import { useGlobalFilter, useSortBy, usePagination } from "react-table"
 
 function DisplayTable({colonnes, lignes})
 {
@@ -28,22 +28,74 @@ function DisplayTable({colonnes, lignes})
     //     Object.assign(element, filtre);
     // })
 
-    const tableInstance = useTable({ columns, data })
-
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
         prepareRow,
-    } = useTable({columns,data,},
-        useSortBy
+        // recherche globale
+        setGlobalFilter,
+        state,
+
+        page, // Instead of using 'rows', we'll use page,
+        // which has only the rows for the active page
+        // The rest of these things are super handy, too ;)
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        pageCount,
+        gotoPage,
+        nextPage,
+        previousPage,
+        setPageSize,
+        state: { pageIndex, pageSize },
+    } = useTable({
+            columns,
+            data,
+            initialState: { pageIndex: 0 },
+        },
+        useGlobalFilter,
+        useSortBy,
+        usePagination,
     )
- 
+
+    const { globalFilter } = state
+
     return (
         <div className="container">
 
+            <div className='bloc-1'>
+                {/* rows per pages */}
+                <select
+                    value={pageSize}
+                    onChange={e => {
+                        setPageSize(Number(e.target.value))
+                    }}
+                >
+                    {[10, 25, 50, 100].map(pageSize => (
+                        <option key={pageSize} value={pageSize}>
+                            Show {pageSize}
+                        </option>
+                    ))}
+                </select>
+
+                {/* global Search */}
+                <div className="search-container">
+                    Global Search
+                    &nbsp; 
+                    <input
+                        type="text"
+                        value={globalFilter || ''}
+                        onChange={(e) => setGlobalFilter(e.target.value)}
+                    />
+                </div>
+
+            </div>
+
+            {/* Table */}
             <table {...getTableProps()} className="table">
+                {/* Apply the table body props */}
                 <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -66,31 +118,82 @@ function DisplayTable({colonnes, lignes})
                     </tr>
                 ))}
                 </thead>
-                {/* Apply the table body props */}
+              
                 <tbody {...getTableBodyProps()}>
-                {// Loop over the table rows
-                rows.map(row => {
-                    // Prepare the row for display
-                    prepareRow(row)
-                    return (
-                    // Apply the row props
-                    <tr {...row.getRowProps()}>
-                        {// Loop over the rows cells
-                        row.cells.map(cell => {
-                        // Apply the cell props
+                    {page.map((row, i) => {
+                        prepareRow(row)
                         return (
-                            <td {...cell.getCellProps()}>
-                            {// Render the cell contents
-                            cell.render('Cell')}
-                            </td>
+                            <tr {...row.getRowProps()}>
+                                {row.cells.map(cell => {
+                                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                })}
+                            </tr>
                         )
-                        })}
-                    </tr>
-                    )
-                })}
+                    })}
                 </tbody>
             </table>
              
+            {/* 
+            Pagination can be built however you'd like. 
+            This is just a very basic UI implementation:
+            */}
+            <div className="pagination">
+
+                <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                    <i className="fa-solid fa-backward"></i>
+                    &nbsp;
+                    First
+                </button>
+
+                {' '}
+
+                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                    <i className="fa-solid reverse fa-play"></i>
+                    &nbsp;
+                    Previous
+                </button>
+
+                {' '}
+
+                <button onClick={() => nextPage()} disabled={!canNextPage}>
+                    Next
+                    &nbsp;
+                    <i className="fa-solid fa-play"></i>
+                </button>
+
+                {' '}
+
+                <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                    Last
+                    &nbsp;
+                    <i className="fa-solid fa-forward"></i>
+                </button>
+
+                {' '}
+
+                <span>
+                    Page
+                    &nbsp;
+                    <strong>
+                        {pageIndex + 1} of {pageOptions.length}
+                    </strong>
+                </span>
+
+                <span>
+                    &nbsp;Go to page:&nbsp;
+                    <input
+                        type="number"
+                        defaultValue={pageIndex + 1}
+                        onChange={e => {
+                        const page = e.target.value ? Number(e.target.value) - 1 : 0
+                        gotoPage(page)
+                        }}
+                        style={{ width: '100px' }}
+                    />
+                </span>
+
+            </div>
+
         </div>
     )
 }

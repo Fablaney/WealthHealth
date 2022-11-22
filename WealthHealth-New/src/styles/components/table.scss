@@ -1,22 +1,40 @@
-.search-container
+.bloc-1
 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 3em;
+
+    .search-container
+    {
+        margin-bottom: 3em;
+    }
 }
+
 .table
 {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border: 1px solid red !important;
+    margin-bottom: 3em;
 }
-td, th
+th, td
 {
-    border: 1px solid #dddddd;
+    border: 2px solid rgba(255, 255, 255, 0.5);
     text-align: left;
     padding: 8px;
     background-color: rgba(0, 0, 0, 0.4);
 }
-// tr:nth-child(even)
-// {
-//     background-color: #dddddd;
-// }
+
+.pagination
+{
+    // padding: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.reverse
+    {
+        transform: rotate(180deg);
+    }
