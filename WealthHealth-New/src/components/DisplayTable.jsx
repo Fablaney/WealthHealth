@@ -63,22 +63,29 @@ function DisplayTable({colonnes, lignes})
     const { globalFilter } = state
 
     return (
-        <div className="container">
+        <>
 
             <div className='bloc-1'>
                 {/* rows per pages */}
-                <select
-                    value={pageSize}
-                    onChange={e => {
-                        setPageSize(Number(e.target.value))
-                    }}
-                >
-                    {[10, 25, 50, 100].map(pageSize => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
+                <div>
+                    Show 
+                    &nbsp;
+                    <select
+                        value={pageSize}
+                        onChange={e => {
+                            setPageSize(Number(e.target.value))
+                        }}
+                    >
+                        {[10, 25, 50, 100].map(pageSize => (
+                            <option key={pageSize} value={pageSize}>
+                                {pageSize}
+                            </option>
+                        ))}
+                    </select>
+                    &nbsp;
+                    entries
+                </div>
+                
 
                 {/* global Search */}
                 <div className="search-container">
@@ -194,7 +201,7 @@ function DisplayTable({colonnes, lignes})
 
             </div>
 
-        </div>
+        </>
     )
 }
 export default DisplayTable
