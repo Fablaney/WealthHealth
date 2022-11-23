@@ -1,5 +1,7 @@
 /* eslint-disable eqeqeq */
 
+import { filter } from "lodash"
+
 export function isEmpty(obj = {})
 {
     return Object.keys(obj).length === 0
@@ -97,40 +99,39 @@ export function filterRows(rows, filters)
     })
 }
 
-
 export function sortRows(rows, sort)
 {
-    // console.log(rows)
-    // console.log(sort)
-    // console.log(typeof(sort.orderBy))
 
+    console.log(rows)
+
+    rows = [...rows].sort((a, b) => {
+        const { order, orderBy } = sort
+    
+        if (isNil(a[orderBy])) return 1
+        
+        if (isNil(b[orderBy])) return -1
+    
+        const aLocale = convertType(a[orderBy])
+
+        const bLocale = convertType(b[orderBy])
+
+        if (order === 'asc')
+        {
+            return aLocale.localeCompare(bLocale, 'fr', { numeric: isNumber(b[orderBy]) })
+        }
+        else
+        {
+            return bLocale.localeCompare(aLocale, 'fr', { numeric: isNumber(a[orderBy]) })
+        }
+    })
 
     return rows
-    
-    
-    //  code origine
-    // return rows.sort((a, b) => {
-    //     const { order, orderBy } = sort
-    
-    //     if (isNil(a[orderBy])) return 1
-        
-    //     if (isNil(b[orderBy])) return -1
-    
-    //     const aLocale = convertType(a[orderBy])
-
-    //     const bLocale = convertType(b[orderBy])
-
-    //     if (order === 'asc')
-    //     {
-    //         return aLocale.localeCompare(bLocale, 'en', { numeric: isNumber(b[orderBy]) })
-    //     }
-    //     else
-    //     {
-    //         return bLocale.localeCompare(aLocale, 'en', { numeric: isNumber(a[orderBy]) })
-    //     }
-    // })
 }
   
+
+
+
+
 export function paginateRows(sortedRows, activePage, rowsPerPage)
 {
     return [...sortedRows].slice((activePage - 1) * rowsPerPage, activePage * rowsPerPage)

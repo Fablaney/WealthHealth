@@ -21,6 +21,7 @@ function DisplayTable( { columns, rows } )
     // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
     // lignes filtrées
     const sortedRows = sortRows(filteredRows, sort)
+    console.log(sortedRows)
     // ----------------------------------------------------------------------------------------
 
 
@@ -58,11 +59,11 @@ function DisplayTable( { columns, rows } )
 
     // tri par titre de colonne
     const handleSort = (title) => {
-        // setActivePage(1)
-        // setSort((prevSort) => ({
-        //     order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
-        //     orderBy: title,
-        // }))
+        setActivePage(1)
+        setSort((prevSort) => ({
+            order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
+            orderBy: title,
+        }))
     }
 
     // affiche XX lignes par page
@@ -97,7 +98,7 @@ function DisplayTable( { columns, rows } )
 
             {/* recherche globale */}
             <div>
-                <input type="search" placeholder="Search ..."/>
+                <input type="search" id="input-search" placeholder="Search ..."/>
             </div>
 
         </div>
