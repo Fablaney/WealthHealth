@@ -19,9 +19,9 @@ function DisplayTable( { columns, rows } )
 
     // origine marche
     // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
-    const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
+    const filteredRows = useMemo(() => filterRows(searchedRows, filters), [searchedRows, filters])
 
-    // modifié avec recherche globale en test
+    // lignes triées asc desc
     const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
 
     // const filteredRows = filterRows(rows, filters)
@@ -37,7 +37,7 @@ function DisplayTable( { columns, rows } )
     // recherche globale
     const handleGlobalSearch = (value) => {
         console.log(value)
-        setSearchedRows(value)
+        
     }
 
     // recherche par mot dans chaque colonne
