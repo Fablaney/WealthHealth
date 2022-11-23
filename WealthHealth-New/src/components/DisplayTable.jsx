@@ -4,6 +4,7 @@ import { sortRows } from "./helpers/helpers"
 import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
 import { sortTable } from "./helpers/helpers"
+import globalSearch from "./helpers/globalsearch"
 import { Pagination } from "./helpers/pagination"
 
 function DisplayTable( { 
@@ -67,6 +68,14 @@ function DisplayTable( {
     const totalPages = Math.ceil(count / rowsPerPage)
 
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
+
+
+
+    // recherche globale
+    const handleGlobalSearch = (param) => {
+        globalSearch(param)
+    }
+
 
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
@@ -134,6 +143,10 @@ function DisplayTable( {
                 </select>
             </div>
             
+            <div className="search">
+                <input type="text" id="myInput" onChange={(event) => handleGlobalSearch(event.target.value)} placeholder="Global Search ..."/>
+            </div>
+
         </div>
 
         <table className="table">
@@ -198,7 +211,7 @@ function DisplayTable( {
                 {
                     rows.map((row, index) => {
                         return (
-                            <tr key={index}> 
+                            <tr key={index} className="tr"> 
                                 <td>{row.FirstName}</td>
                                 <td>{row.LastName}</td>
                                 <td>{row.BirthDate}</td>
