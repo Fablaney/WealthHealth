@@ -3,27 +3,51 @@ import { useState, useMemo } from "react"
 import { sortRows } from "./helpers/helpers"
 import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
-
-
-// recherche globale
-import globalSearch from "./helpers/globalsearch"
-
-// pagination
 import { Pagination } from "./helpers/pagination"
 
-
-
-function DisplayTable( { columns, rows } )
+function DisplayTable( { 
+    columns,
+    rows
+ } )
 {
     // console.log("columns")
     // console.log(columns)
     // console.log("j'arrive dans le composant et j'affiche rows")
     // console.log(rows)
 
+    // const rows = [
+    //     {
+    //         FirstName: 'Julie',
+    //         LastName: 'Perarnau',
+    //         BirthDate: '07/08/1989',
+    //         StartDate: '01/09/1992',
+    //         Street: '7 Route de Dammartin',
+    //         City: 'Eugene',
+    //         State: 'OR',
+    //         Zipcode: '0123',
+    //         Department: 'Marketing'
+    //     },
+    //     {
+    //         FirstName: 'Claire',
+    //         LastName: 'Bertrand',
+    //         BirthDate: '07/08/1959',
+    //         StartDate: '01/09/2020',
+    //         Street: 'A Great Road',
+    //         City: 'El Paso',
+    //         State: 'TX',
+    //         Zipcode: '9876',
+    //         Department: 'Sales'
+    //     },
+    // ]
+
+    const [activePage, setActivePage] = useState(1)
+
     const [filters, setFilters] = useState({})
 
     const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
    
+    const [rowsPerPage, setRowsPerPage] = useState(10) 
+  
     // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
     // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
@@ -32,25 +56,11 @@ function DisplayTable( { columns, rows } )
 
     const sortedRows = sortRows(filteredRows, sort)
 
-    // const sortedRows = rows
-
-    // pagination
-    const [activePage, setActivePage] = useState(1)
-    const [rowsPerPage, setRowsPerPage] = useState(10)
-
-    // compteur de pages
-    const count = filteredRows.length
-    const totalPages = Math.ceil(count / rowsPerPage)
-
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
+  
+    const count = filteredRows.length
 
-
-
-    // recherche globale
-    const handleGlobalSearch = (param) => {
-        globalSearch(param)
-    }
-
+    const totalPages = Math.ceil(count / rowsPerPage)
 
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
@@ -79,9 +89,7 @@ function DisplayTable( { columns, rows } )
 
     // tri par titre de colonne
     const handleSort = (title) => {
-
         setActivePage(1)
-      
         setSort((prevSort) => ({
             order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
             orderBy: title,
@@ -107,11 +115,9 @@ function DisplayTable( { columns, rows } )
     return (
         <>
         <div className='show-search'>
-
             {/* show number */}
             <div className='show'>
                 Show
-                &nbsp;
                 <select name="entries-number" onChange={(event) => handleEntries(event.target.value)}>
                     <option>10</option>
                     <option>25</option>
@@ -120,10 +126,6 @@ function DisplayTable( { columns, rows } )
                 </select>
             </div>
             
-            <div className="search">
-                <input type="text" id="myInput" onChange={(event) => handleGlobalSearch(event.target.value)} placeholder="Global Search ..."/>
-            </div>
-
         </div>
 
         <table className="table">
@@ -133,32 +135,29 @@ function DisplayTable( { columns, rows } )
                     {columns.map((column) => {
                         const sortIcon = () => {
 
-                            // if (column.title === sort.orderBy)
-                            // {
-                            //     if (sort.order === 'asc')
-                            //     {
-                            //         return <i className="fa-solid fa-caret-up"></i>
-                            //     }
-                            //     else
-                            //     {
-                            //         return <i className="fa-solid fa-caret-down"></i>
-                            //     }
-                            // }
-                            // else
-                            // {
+                            if (column.title === sort.orderBy)
+                            {
+                                if (sort.order === 'asc')
+                                {
+                                    return <i className="fa-solid fa-caret-up"></i>
+                                }
+                                else
+                                {
+                                    return <i className="fa-solid fa-caret-down"></i>
+                                }
+                            }
+                            else
+                            {
                                 return <i className="fa-solid fa-sort"></i>
-                            // }
+                            }
                         }
 
                         return (
-                            <th key={column.title} onClick={() => handleSort(column.title)}>
+                            <th key={column.title}>
 
                                 <span>{column.label}</span>
                                 &nbsp;
-                                <button onClick={() => handleSort(column.title)}>
-                                    {sortIcon()}
-                                    {/* {column.label} */}
-                                </button>
+                                <button onClick={() => handleSort(column.title)}>{sortIcon()}</button>
 
                             </th>
                         )
@@ -185,20 +184,25 @@ function DisplayTable( { columns, rows } )
             </thead>
 
             <tbody>
-                {
-                    rows.map((row, index) => {
-                        return (
-                            <tr key={index} className="tr"> 
-                                <td>{row.FirstName}</td>
-                                <td>{row.LastName}</td>
-                                <td>{row.BirthDate}</td>
-                                <td>{row.StartDate}</td>
-                                <td>{row.Street}</td>
-                                <td>{row.City}</td>
-                                <td>{row.State}</td>
-                                <td>{row.Zipcode}</td>
-                                <td>{row.Department}</td>
-                            </tr>
+                {calculatedRows.map((row, index) => {
+                    return (
+                        <tr key={row.id} >
+                            {/* <tr key={index} > */}
+                            {columns.map((column) => {
+                                // console.log("column")
+                                // console.log(column)
+                                // console.log("column.format")
+                                // console.log(column.format)
+                                if (column.format)
+                                {
+                                    return <td key={column.title}>{column.format(row[column.title])}</td>
+                                }
+                                else
+                                {
+                                    return <td key={column.title}>{row[column.title]}</td>
+                                }
+                            })}
+                        </tr>
                         )
                     })
                 }
