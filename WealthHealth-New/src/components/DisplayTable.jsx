@@ -5,41 +5,8 @@ import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
 import { Pagination } from "./helpers/pagination"
 
-function DisplayTable( { 
-    columns,
-    rows
- } )
+function DisplayTable( { columns, rows } )
 {
-    // console.log("columns")
-    // console.log(columns)
-    // console.log("j'arrive dans le composant et j'affiche rows")
-    // console.log(rows)
-
-    // const rows = [
-    //     {
-    //         FirstName: 'Julie',
-    //         LastName: 'Perarnau',
-    //         BirthDate: '07/08/1989',
-    //         StartDate: '01/09/1992',
-    //         Street: '7 Route de Dammartin',
-    //         City: 'Eugene',
-    //         State: 'OR',
-    //         Zipcode: '0123',
-    //         Department: 'Marketing'
-    //     },
-    //     {
-    //         FirstName: 'Claire',
-    //         LastName: 'Bertrand',
-    //         BirthDate: '07/08/1959',
-    //         StartDate: '01/09/2020',
-    //         Street: 'A Great Road',
-    //         City: 'El Paso',
-    //         State: 'TX',
-    //         Zipcode: '9876',
-    //         Department: 'Sales'
-    //     },
-    // ]
-
     const [activePage, setActivePage] = useState(1)
 
     const [filters, setFilters] = useState({})
@@ -48,19 +15,30 @@ function DisplayTable( {
    
     const [rowsPerPage, setRowsPerPage] = useState(10) 
   
+    const [searchedRows, setSearchedRows] = useState(rows) 
+
+    // origine marche
     // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
+    const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
-    // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
+    // modifié avec recherche globale en test
+    const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
 
-    const filteredRows = filterRows(rows, filters)
+    // const filteredRows = filterRows(rows, filters)
 
-    const sortedRows = sortRows(filteredRows, sort)
+    // const sortedRows = sortRows(filteredRows, sort)
 
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
   
     const count = filteredRows.length
 
     const totalPages = Math.ceil(count / rowsPerPage)
+
+    // recherche globale
+    const handleGlobalSearch = (value) => {
+        console.log(value)
+        setSearchedRows(value)
+    }
 
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
@@ -130,7 +108,7 @@ function DisplayTable( {
 
             {/* recherche globale */}
             <div>
-                <input type="search" id="input-search" placeholder="Search ..."/>
+                <input type="search" id="input-search" placeholder="Search ..." onChange={(event) => handleGlobalSearch(event.target.value)}/>
             </div>
 
         </div>
