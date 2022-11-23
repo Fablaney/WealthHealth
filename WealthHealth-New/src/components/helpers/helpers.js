@@ -66,7 +66,7 @@ export function convertType(value)
     return value
 }
 
-  
+// filtrage par colonne
 export function filterRows(rows, filters)
 {
     if (isEmpty(filters)) return rows

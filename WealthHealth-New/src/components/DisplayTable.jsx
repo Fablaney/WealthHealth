@@ -10,18 +10,21 @@ function DisplayTable( { columns, rows } )
     const [filters, setFilters] = useState({})
 
     const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
-   
+
+    // Filtrage par colonne OK
     // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
-
-    // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
-
     const filteredRows = filterRows(rows, filters)
-
-    // lignes filtrées
-    const sortedRows = sortRows(filteredRows, sort)
     const count = filteredRows.length
 
-    // pagination
+
+    // ----------------------------------------------------------------------------------------
+    // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
+    // lignes filtrées
+    const sortedRows = sortRows(filteredRows, sort)
+    // ----------------------------------------------------------------------------------------
+
+
+    // pagination OK
     const [activePage, setActivePage] = useState(1)
     const [rowsPerPage, setRowsPerPage] = useState(10) 
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
@@ -55,11 +58,17 @@ function DisplayTable( { columns, rows } )
 
     // tri par titre de colonne
     const handleSort = (title) => {
-        setActivePage(1)
-        setSort((prevSort) => ({
-            order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
-            orderBy: title,
-        }))
+        // setActivePage(1)
+        // setSort((prevSort) => ({
+        //     order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
+        //     orderBy: title,
+        // }))
+    }
+
+    // affiche XX lignes par page
+    const handleEntries = (numberEntries) => {
+        clearAll()
+        setRowsPerPage(numberEntries)
     }
 
     // reset tous les filtres
@@ -70,20 +79,14 @@ function DisplayTable( { columns, rows } )
         setRowsPerPage(10)
     }
 
-    // affiche XX lignes par page
-    const handleEntries = (numberEntries) => {
-        // console.log(numberEntries)
-        let entries = numberEntries
-        clearAll()
-        setRowsPerPage(entries)
-    }
-
     return (
         <>
         <div className='show-search'>
-            {/* show number */}
+
+            {/* ligne par page */}
             <div className='show'>
                 Show
+                &nbsp;
                 <select name="entries-number" onChange={(event) => handleEntries(event.target.value)}>
                     <option>10</option>
                     <option>25</option>
@@ -91,7 +94,12 @@ function DisplayTable( { columns, rows } )
                     <option>100</option>
                 </select>
             </div>
-            
+
+            {/* recherche globale */}
+            <div>
+                <input type="search" placeholder="Search ..."/>
+            </div>
+
         </div>
 
         <table className="table">
