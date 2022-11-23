@@ -115,9 +115,11 @@ function DisplayTable( {
     return (
         <>
         <div className='show-search'>
+            
             {/* show number */}
             <div className='show'>
                 Show
+                &nbsp;
                 <select name="entries-number" onChange={(event) => handleEntries(event.target.value)}>
                     <option>10</option>
                     <option>25</option>
@@ -125,7 +127,12 @@ function DisplayTable( {
                     <option>100</option>
                 </select>
             </div>
-            
+
+            {/* recherche globale */}
+            <div>
+                <input type="search" id="input-search" placeholder="Search ..."/>
+            </div>
+
         </div>
 
         <table className="table">
@@ -153,11 +160,11 @@ function DisplayTable( {
                         }
 
                         return (
-                            <th key={column.title}>
+                            <th key={column.title}  onClick={() => handleSort(column.title)}>
 
                                 <span>{column.label}</span>
                                 &nbsp;
-                                <button onClick={() => handleSort(column.title)}>{sortIcon()}</button>
+                                <button >{sortIcon()}</button>
 
                             </th>
                         )
