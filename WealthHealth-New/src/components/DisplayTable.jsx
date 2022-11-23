@@ -41,30 +41,33 @@ function DisplayTable( {
     //     },
     // ]
 
-    const [activePage, setActivePage] = useState(1)
+    
 
     const [filters, setFilters] = useState({})
 
     const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
    
-    const [rowsPerPage, setRowsPerPage] = useState(10) 
-  
+
     // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
     // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
 
     const filteredRows = filterRows(rows, filters)
 
-    // const sortedRows = sortRows(filteredRows, sort)
+    const sortedRows = sortRows(filteredRows, sort)
 
-    const sortedRows = rows
+    // const sortedRows = rows
+
+    // pagination
+    const [activePage, setActivePage] = useState(1)
+    const [rowsPerPage, setRowsPerPage] = useState(10)
+
+    // compteur de pages
+    const count = filteredRows.length
+    const totalPages = Math.ceil(count / rowsPerPage)
 
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
-  
-    const count = filteredRows.length
 
-    const totalPages = Math.ceil(count / rowsPerPage)
-    
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
         setActivePage(1)
@@ -92,8 +95,6 @@ function DisplayTable( {
 
     // tri par titre de colonne
     const handleSort = (title) => {
-        sortTable(title)
-   
         setActivePage(1)
         setSort((prevSort) => ({
             order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
@@ -120,9 +121,11 @@ function DisplayTable( {
     return (
         <>
         <div className='show-search'>
+
             {/* show number */}
             <div className='show'>
                 Show
+                &nbsp;
                 <select name="entries-number" onChange={(event) => handleEntries(event.target.value)}>
                     <option>10</option>
                     <option>25</option>
