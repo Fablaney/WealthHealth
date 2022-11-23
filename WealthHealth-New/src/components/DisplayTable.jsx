@@ -5,60 +5,26 @@ import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
 import { Pagination } from "./helpers/pagination"
 
-function DisplayTable( { 
-    columns,
-    rows
- } )
+function DisplayTable( { columns, rows } )
 {
-    // console.log("columns")
-    // console.log(columns)
-    // console.log("j'arrive dans le composant et j'affiche rows")
-    // console.log(rows)
-
-    // const rows = [
-    //     {
-    //         FirstName: 'Julie',
-    //         LastName: 'Perarnau',
-    //         BirthDate: '07/08/1989',
-    //         StartDate: '01/09/1992',
-    //         Street: '7 Route de Dammartin',
-    //         City: 'Eugene',
-    //         State: 'OR',
-    //         Zipcode: '0123',
-    //         Department: 'Marketing'
-    //     },
-    //     {
-    //         FirstName: 'Claire',
-    //         LastName: 'Bertrand',
-    //         BirthDate: '07/08/1959',
-    //         StartDate: '01/09/2020',
-    //         Street: 'A Great Road',
-    //         City: 'El Paso',
-    //         State: 'TX',
-    //         Zipcode: '9876',
-    //         Department: 'Sales'
-    //     },
-    // ]
-
-    const [activePage, setActivePage] = useState(1)
-
     const [filters, setFilters] = useState({})
 
     const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
    
-    const [rowsPerPage, setRowsPerPage] = useState(10) 
-  
     // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
     // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
 
     const filteredRows = filterRows(rows, filters)
 
+    // lignes filtrées
     const sortedRows = sortRows(filteredRows, sort)
-
-    const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
-  
     const count = filteredRows.length
+
+    // pagination
+    const [activePage, setActivePage] = useState(1)
+    const [rowsPerPage, setRowsPerPage] = useState(10) 
+    const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
 
     const totalPages = Math.ceil(count / rowsPerPage)
 

@@ -105,12 +105,10 @@ export function sortRows(rows, sort)
     // console.log(typeof(sort.orderBy))
 
 
-        return rows
+    return rows
     
     
-
-    // return rows
-    // // code origine
+    //  code origine
     // return rows.sort((a, b) => {
     //     const { order, orderBy } = sort
     
