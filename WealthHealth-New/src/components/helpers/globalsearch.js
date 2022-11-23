@@ -2,7 +2,7 @@ function globalSearch(param)
 {
     // Declare variables
     var filter, table, tr, td, i, txtValue
-    // input = document.getElementById("myInput")
+
     filter = param.toUpperCase()
 
     table = document.getElementsByClassName("table")
