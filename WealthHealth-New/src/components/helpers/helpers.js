@@ -98,48 +98,30 @@ export function filterRows(rows, filters)
   
 export function sortRows(rows, sort)
 {
-    // console.log(sort)
-    // console.log(typeof(sort.orderBy))
+    console.log(rows)
 
-    if(sort.orderBy === "id")
-    {
-        rows.sort(
-            (a, b) => 
-            parseFloat(a.id)
-            - 
-            parseFloat(b.id)
-        )
-
-        return rows
-    }
-    else
-    {
-        return rows
-    }
+    rows = [...rows].sort((a, b) => {
+        const { order, orderBy } = sort
     
-
-    // return rows
-    // // code origine
-    // return rows.sort((a, b) => {
-    //     const { order, orderBy } = sort
-    
-    //     if (isNil(a[orderBy])) return 1
+        if (isNil(a[orderBy])) return 1
         
-    //     if (isNil(b[orderBy])) return -1
+        if (isNil(b[orderBy])) return -1
     
-    //     const aLocale = convertType(a[orderBy])
+        const aLocale = convertType(a[orderBy])
 
-    //     const bLocale = convertType(b[orderBy])
+        const bLocale = convertType(b[orderBy])
 
-    //     if (order === 'asc')
-    //     {
-    //         return aLocale.localeCompare(bLocale, 'en', { numeric: isNumber(b[orderBy]) })
-    //     }
-    //     else
-    //     {
-    //         return bLocale.localeCompare(aLocale, 'en', { numeric: isNumber(a[orderBy]) })
-    //     }
-    // })
+        if (order === 'asc')
+        {
+            return aLocale.localeCompare(bLocale, 'fr', { numeric: isNumber(b[orderBy]) })
+        }
+        else
+        {
+            return bLocale.localeCompare(aLocale, 'fr', { numeric: isNumber(a[orderBy]) })
+        }
+    })
+
+    return rows
 }
   
 export function paginateRows(sortedRows, activePage, rowsPerPage)
