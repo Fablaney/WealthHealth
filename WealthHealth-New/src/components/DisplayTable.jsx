@@ -4,6 +4,7 @@ import { sortRows } from "./helpers/helpers"
 import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
 import { Pagination } from "./helpers/pagination"
+import Dropdown from "./Dropdown"
 
 function DisplayTable( { columns, rows } )
 {
@@ -144,6 +145,8 @@ function DisplayTable( { columns, rows } )
                     <option>50</option>
                     <option>100</option>
                 </select>
+                &nbsp;
+                Entries
             </div>
 
             {/* recherche globale */}
