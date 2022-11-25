@@ -45,14 +45,14 @@ function DisplayTable( { columns, rows } )
         if (value)
         {
             console.log('cas 1')
+
             columns.map(item => {
 
                 console.log(item.title)
 
                 title = item.title
-
-                
             })
+
             setFilters((prevFilters) => ({
                 ...prevFilters,
                 
