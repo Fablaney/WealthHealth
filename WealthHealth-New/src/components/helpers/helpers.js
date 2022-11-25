@@ -72,15 +72,21 @@ export function searchRows(rows, columns, search)
     console.log(rows)
     console.log(search)
 
+    
     rows = rows.filter(row => {
 
-       console.log(row)
-
-    //    columns.forEach(column => {
-    //         console.log(column.title)
-    //         return row.column.title = search
-    //    })
+        console.log(row)
         
+        for(let i = 0; i < columns.length; i++)
+        {
+            if(toLower(row[columns[i].title]).includes(toLower(search)))
+            {
+                // return row
+                // break;
+                return row
+            }
+        }
+ 
     })
 
     return rows 

@@ -17,6 +17,7 @@ import Calendar from '../components/DatePicker.jsx'
 
 // composents
 import Modale from '../components/Modal.jsx'
+import Dropdown from '../components/Dropdown.jsx'
 
 function Home()
 {
@@ -118,7 +119,9 @@ function Home()
                         {errors.City && <span className='error-msg'>Please enter your city.</span>}
 
                         <label htmlFor="State">State</label>
+                        <Dropdown title="Stateliste">liste</Dropdown>
                         <input
+                            hidden
                             type="text"
                             id='State'
                             list='State-list'

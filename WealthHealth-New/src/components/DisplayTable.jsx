@@ -1,5 +1,5 @@
 // import react
-import { useState, useMemo } from "react"
+import { useState, useMemo} from "react"
 import { sortRows } from "./helpers/helpers"
 import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
@@ -8,6 +8,8 @@ import { searchRows } from "./helpers/helpers"
 
 function DisplayTable( { columns, rows } )
 {
+    const allrows = rows
+
     // ok
     const [activePage, setActivePage] = useState(1)
 
@@ -32,7 +34,7 @@ function DisplayTable( { columns, rows } )
     // lignes + filtres
     // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
     // prod
-    const filteredRows = useMemo(() => filterRows(globalSearchRows , filters), [globalSearchRows , filters])
+    const filteredRows = useMemo(() => filterRows(globalSearchRows, filters), [globalSearchRows, filters])
 
     // lignes + filtres => sort asc / desc
     const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
@@ -42,7 +44,7 @@ function DisplayTable( { columns, rows } )
     // const sortedRows = sortRows(filteredRows, sort)
 
     // lignes + filtre + sort => paginées
-    const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
+    const calculatedRows = rows = paginateRows(sortedRows, activePage, rowsPerPage)
   
     const count = filteredRows.length
 
@@ -61,6 +63,9 @@ function DisplayTable( { columns, rows } )
         else
         {
             console.log('cas 2')
+            console.log(rows)
+            console.log(allrows)
+            setGlobalSearch("")
         }
     }
 
@@ -85,7 +90,6 @@ function DisplayTable( { columns, rows } )
                 delete updatedFilters[title]
            
                 return updatedFilters
-
             })
         }
     }
@@ -107,9 +111,13 @@ function DisplayTable( { columns, rows } )
         setSort({ order: 'asc', orderBy: 'id' })
         setFilters({})
         setRowsPerPage(10)
+        rows = allrows
 
-        // console.log(document.querySelectorAll("input").setAttribute('value', ""))
-        // document.querySelectorAll("input").setAttribute('value', "")
+        // je vide la valeur des inputs
+        document.querySelectorAll("input").forEach(input => {
+            console.log(input.value)
+            input.value =""
+        }) 
     }
 
     // affiche XX lignes par page

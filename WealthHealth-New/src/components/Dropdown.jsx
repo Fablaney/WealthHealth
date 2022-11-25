@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function Dropdown({title, icon, children})
+function Dropdown({title, children})
 {
     const [open, setOpen] = useState(false)
 
@@ -12,7 +12,7 @@ function Dropdown({title, icon, children})
         <div className="dropdown">
 
             <button className="dropdown-button test" onClick={handleOpen}>
-                { title } - { icon }
+                { title }
             </button>
 
             { open ? <div className="dropdown-content">{children}</div> : <div></div> }
