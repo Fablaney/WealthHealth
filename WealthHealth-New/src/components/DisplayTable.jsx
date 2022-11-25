@@ -40,18 +40,25 @@ function DisplayTable( { columns, rows } )
     const handleGlobalSearch= (value) => {
         setActivePage(1)
 
-        let title = ""
+        let [title] = ""
+
+        columns.map(item => {
+
+            console.log(item.title)
+
+            title = item.title
+setFilters((prevFilters) => ({
+                ...prevFilters,
+                
+                [title]: value,
+            }))
+        })
 
         if (value)
         {
             console.log('cas 1')
 
-            columns.map(item => {
-
-                console.log(item.title)
-
-                title = item.title
-            })
+            
 
             setFilters((prevFilters) => ({
                 ...prevFilters,
