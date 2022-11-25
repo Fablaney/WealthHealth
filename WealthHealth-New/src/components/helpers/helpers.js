@@ -4,31 +4,26 @@ export function isEmpty(obj = {})
 {
     return Object.keys(obj).length === 0
 }
-  
 
 export function isString(value)
 {
     return typeof value === 'string' || value instanceof String
 }
-  
 
 export function isNumber(value)
 {
     return typeof value == 'number' && !isNaN(value)
 }
-  
 
 export function isBoolean(value)
 {
     return value === true || value === false
 }
-  
 
 export function isNil(value)
 {
     return typeof value === 'undefined' || value === null
 }
-  
 
 export function isDateString(value)
 {
@@ -36,13 +31,11 @@ export function isDateString(value)
   
     return value.match(/^\d{2}-\d{2}-\d{4}$/)
 }
-  
 
 export function convertDateString(value)
 {
     return value.substr(6, 4) + value.substr(3, 2) + value.substr(0, 2)
 }
-  
 
 export function toLower(value)
 {
@@ -52,7 +45,6 @@ export function toLower(value)
     }
     return value
 }
-  
 
 export function convertType(value)
 {
@@ -73,7 +65,6 @@ export function convertType(value)
 
     return value
 }
-  
 
 export function filterRows(rows, filters)
 {
@@ -104,7 +95,6 @@ export function filterRows(rows, filters)
         })
     })
 }
-  
 
 export function sortRows(rows, sort)
 {
@@ -131,7 +121,6 @@ export function sortRows(rows, sort)
 
     return rows
 }
-  
 
 export function paginateRows(sortedRows, activePage, rowsPerPage)
 {

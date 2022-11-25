@@ -15,37 +15,41 @@ function DisplayTable( { columns, rows } )
    
     const [rowsPerPage, setRowsPerPage] = useState(10) 
   
-    const [searchedRows, setSearchedRows] = useState(rows) 
-
     // origine marche
-    // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
-    const filteredRows = useMemo(() => filterRows(searchedRows, filters), [searchedRows, filters])
+    // lignes + filtres
+    const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
 
-    // lignes triées asc desc
+    // lignes + filtres => sort asc / desc
     const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
 
     // const filteredRows = filterRows(rows, filters)
 
     // const sortedRows = sortRows(filteredRows, sort)
 
+    // lignes + filtre + sort => paginées
     const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
   
     const count = filteredRows.length
 
     const totalPages = Math.ceil(count / rowsPerPage)
 
-    // recherche globale
-    const handleGlobalSearch = (value) => {
-        console.log(value)
-        
-    }
-
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
         setActivePage(1)
-    
-        if (value)
+
+        console.log("value")
+        console.log(value)
+        console.log("title")
+        console.log(title)
+        
+        if(title === undefined)
         {
+            console.log('cas 1')
+
+        }
+        if (value && title)
+        {
+            console.log('cas 2')
             setFilters((prevFilters) => ({
                 ...prevFilters,
                 [title]: value,
@@ -53,6 +57,7 @@ function DisplayTable( { columns, rows } )
         }
         else
         {
+            console.log('cas 3')
             setFilters((prevFilters) => {
 
                 const updatedFilters = { ...prevFilters }
@@ -80,6 +85,9 @@ function DisplayTable( { columns, rows } )
         setActivePage(1)
         setFilters({})
         setRowsPerPage(10)
+
+        // console.log(document.querySelectorAll("input").setAttribute('value', ""))
+        // document.querySelectorAll("input").setAttribute('value', "")
     }
 
     // affiche XX lignes par page
@@ -108,7 +116,7 @@ function DisplayTable( { columns, rows } )
 
             {/* recherche globale */}
             <div>
-                <input type="search" id="input-search" placeholder="Search ..." onChange={(event) => handleGlobalSearch(event.target.value)}/>
+                <input type="search" id="input-search" placeholder="Search ..." onChange={(event) => handleSearch(event.target.value)}/>
             </div>
 
         </div>
