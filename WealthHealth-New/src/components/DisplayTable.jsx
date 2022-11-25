@@ -10,6 +10,9 @@ function DisplayTable( { columns, rows } )
     const [activePage, setActivePage] = useState(1)
 
     const [filters, setFilters] = useState({})
+    
+    console.log("filters")
+    console.log(filters)
 
     const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
    
@@ -33,23 +36,50 @@ function DisplayTable( { columns, rows } )
 
     const totalPages = Math.ceil(count / rowsPerPage)
 
+
+    const handleGlobalSearch= (value) => {
+        setActivePage(1)
+
+        let title = ""
+
+        if (value)
+        {
+            console.log('cas 1')
+            columns.map(item => {
+
+                console.log(item.title)
+
+                title = item.title
+
+                
+            })
+            setFilters((prevFilters) => ({
+                ...prevFilters,
+                
+                [title]: value,
+            }))
+        }
+        else
+        {
+            console.log('cas 2')
+            setFilters((prevFilters) => {
+
+                const updatedFilters = { ...prevFilters }
+
+                delete updatedFilters[title]
+           
+                return updatedFilters
+
+            })
+        }
+    }
+
     // recherche par mot dans chaque colonne
     const handleSearch = (value, title) => {
         setActivePage(1)
 
-        console.log("value")
-        console.log(value)
-        console.log("title")
-        console.log(title)
-        
-        if(title === undefined)
+        if (value)
         {
-            console.log('cas 1')
-
-        }
-        if (value && title)
-        {
-            console.log('cas 2')
             setFilters((prevFilters) => ({
                 ...prevFilters,
                 [title]: value,
@@ -57,13 +87,12 @@ function DisplayTable( { columns, rows } )
         }
         else
         {
-            console.log('cas 3')
             setFilters((prevFilters) => {
 
                 const updatedFilters = { ...prevFilters }
 
                 delete updatedFilters[title]
-        
+           
                 return updatedFilters
 
             })
@@ -116,7 +145,7 @@ function DisplayTable( { columns, rows } )
 
             {/* recherche globale */}
             <div>
-                <input type="search" id="input-search" placeholder="Search ..." onChange={(event) => handleSearch(event.target.value)}/>
+                <input type="search" id="input-search" placeholder="Search ..." onChange={(event) => handleGlobalSearch(event.target.value)}/>
             </div>
 
         </div>
