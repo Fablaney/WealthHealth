@@ -66,13 +66,22 @@ export function convertType(value)
     return value
 }
 
-export function searchRows(rows, searchRows)
+// recherche globale
+export function searchRows(rows, columns, search)
 {
+    console.log(rows)
+    console.log(search)
 
+    rows.filter(row => {
 
-    return rows 
+       console.log(row)
+        
+    })
+
+    // return rows 
 }
 
+// filtre par colonne
 export function filterRows(rows, filters)
 {
     if (isEmpty(filters)) return rows
@@ -103,6 +112,7 @@ export function filterRows(rows, filters)
     })
 }
 
+// sort asc /desc
 export function sortRows(rows, sort)
 {
     rows = [...rows].sort((a, b) => {
@@ -129,6 +139,7 @@ export function sortRows(rows, sort)
     return rows
 }
 
+// pagination
 export function paginateRows(sortedRows, activePage, rowsPerPage)
 {
     return [...sortedRows].slice((activePage - 1) * rowsPerPage, activePage * rowsPerPage)

@@ -12,7 +12,7 @@ function DisplayTable( { columns, rows } )
     const [activePage, setActivePage] = useState(1)
 
     // prod
-    const [globalSearch, setGlobalSearch] = useState(rows)
+    const [globalSearch, setGlobalSearch] = useState("")
 
     // ok
     const [filters, setFilters] = useState({})
@@ -24,8 +24,8 @@ function DisplayTable( { columns, rows } )
     const [rowsPerPage, setRowsPerPage] = useState(10) 
   
 
-    // prod
-    const globalSearchRows = useMemo(() => searchRows(rows, globalSearch), [rows, globalSearch])
+    // prod recherche globale
+    const globalSearchRows = useMemo(() => searchRows(rows, columns, globalSearch), [rows, columns, globalSearch])
 
 
     // origine marche
@@ -56,7 +56,7 @@ function DisplayTable( { columns, rows } )
         if (value)
         {
             console.log('cas 1')
-
+            setGlobalSearch(value)
         }
         else
         {
@@ -204,7 +204,6 @@ function DisplayTable( { columns, rows } )
                 {calculatedRows.map((row, index) => {
                     return (
                         <tr key={row.id} >
-                            {/* <tr key={index} > */}
                             {columns.map((column) => {
                                 // console.log("column")
                                 // console.log(column)
