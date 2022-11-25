@@ -45,8 +45,6 @@ export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActi
                 </div>
 
             </div>
-
-       
         </>
     )
 }
