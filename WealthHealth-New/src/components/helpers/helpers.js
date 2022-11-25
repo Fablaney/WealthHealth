@@ -72,13 +72,18 @@ export function searchRows(rows, columns, search)
     console.log(rows)
     console.log(search)
 
-    rows.filter(row => {
+    rows = rows.filter(row => {
 
        console.log(row)
+
+    //    columns.forEach(column => {
+    //         console.log(column.title)
+    //         return row.column.title = search
+    //    })
         
     })
 
-    // return rows 
+    return rows 
 }
 
 // filtre par colonne
