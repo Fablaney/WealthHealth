@@ -68,9 +68,7 @@ export function convertType(value)
 
 export function searchRows(rows, searchRows)
 {
-    rows = [...rows].includes((searchRows) => {
-      
-    })
+
 
     return rows 
 }

@@ -12,7 +12,7 @@ function DisplayTable( { columns, rows } )
     const [activePage, setActivePage] = useState(1)
 
     // prod
-    const [searchRows, setSearchRows] = useState(rows)
+    const [globalSearch, setGlobalSearch] = useState(rows)
 
     // ok
     const [filters, setFilters] = useState({})
@@ -25,8 +25,7 @@ function DisplayTable( { columns, rows } )
   
 
     // prod
-    const globalSearchRows = useMemo(() => searchRows(rows, searchRows), [rows, searchRows])
-
+    const globalSearchRows = useMemo(() => searchRows(rows, globalSearch), [rows, globalSearch])
 
 
     // origine marche
@@ -50,37 +49,24 @@ function DisplayTable( { columns, rows } )
     const totalPages = Math.ceil(count / rowsPerPage)
 
     // recherche globale
-    const handleGlobalSearch= (value) => {
+    function handleGlobalSearch(value)
+    {
         setActivePage(1)
 
         if (value)
         {
             console.log('cas 1')
 
-            // rows.forEach(row => {
-            //     console.log(row)
-                
-            //     // if( row.includes(value))
-            //     // {
-            //     //     console.log(rows)
-            //     // }
-            // })
-            rows = [...rows].filter(word => word.includes(value));
-            // setFilters((prevFilters) => ({
-            //     ...prevFilters,
-                
-            //     [title]: value,
-            // }))
         }
         else
         {
             console.log('cas 2')
-            setSearchRows(rows)
         }
     }
 
     // recherche par mot dans chaque colonne
-    const handleSearch = (value, title) => {
+    function handleSearch(value, title)
+    {
         setActivePage(1)
 
         if (value)
@@ -105,7 +91,8 @@ function DisplayTable( { columns, rows } )
     }
 
     // tri par titre de colonne
-    const handleSort = (title) => {
+    function handleSort(title)
+    {
         setActivePage(1)
         setSort((prevSort) => ({
             order: prevSort.order === 'asc' && prevSort.orderBy === title ? 'desc' : 'asc',
@@ -116,8 +103,8 @@ function DisplayTable( { columns, rows } )
     // reset tous les filtres
     function clearAll()
     {
-        setSort({ order: 'asc', orderBy: 'id' })
         setActivePage(1)
+        setSort({ order: 'asc', orderBy: 'id' })
         setFilters({})
         setRowsPerPage(10)
 
@@ -126,7 +113,8 @@ function DisplayTable( { columns, rows } )
     }
 
     // affiche XX lignes par page
-    const handleEntries = (numberEntries) => {
+    function handleEntries(numberEntries)
+    {
         // console.log(numberEntries)
         let entries = numberEntries
         clearAll()
@@ -191,7 +179,6 @@ function DisplayTable( { columns, rows } )
 
                             </th>
                         )
-
                     })}
                 </tr>
 
