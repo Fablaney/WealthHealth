@@ -42,23 +42,19 @@ function DisplayTable( { columns, rows } )
 
         let [title] = ""
 
-        columns.map(item => {
-
-            console.log(item.title)
-
-            title = item.title
-setFilters((prevFilters) => ({
-                ...prevFilters,
-                
-                [title]: value,
-            }))
-        })
+     
 
         if (value)
         {
             console.log('cas 1')
 
-            
+            columns.map(item => {
+
+                console.log(item.title)
+    
+                title = item.title
+    
+            })
 
             setFilters((prevFilters) => ({
                 ...prevFilters,
