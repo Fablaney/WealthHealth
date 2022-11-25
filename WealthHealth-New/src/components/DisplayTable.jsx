@@ -4,24 +4,36 @@ import { sortRows } from "./helpers/helpers"
 import { filterRows } from "./helpers/helpers"
 import { paginateRows } from "./helpers/helpers"
 import { Pagination } from "./helpers/pagination"
-import Dropdown from "./Dropdown"
+import { searchRows } from "./helpers/helpers"
 
 function DisplayTable( { columns, rows } )
 {
+    // ok
     const [activePage, setActivePage] = useState(1)
 
-    const [filters, setFilters] = useState({})
-    
-    console.log("filters")
-    console.log(filters)
+    // prod
+    const [searchRows, setSearchRows] = useState(rows)
 
+    // ok
+    const [filters, setFilters] = useState({})
+
+    // ok
     const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' })
-   
+
+    // ok
     const [rowsPerPage, setRowsPerPage] = useState(10) 
   
+
+    // prod
+    const globalSearchRows = useMemo(() => searchRows(rows, searchRows), [rows, searchRows])
+
+
+
     // origine marche
     // lignes + filtres
-    const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
+    // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
+    // prod
+    const filteredRows = useMemo(() => filterRows(globalSearchRows , filters), [globalSearchRows , filters])
 
     // lignes + filtres => sort asc / desc
     const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
@@ -37,44 +49,33 @@ function DisplayTable( { columns, rows } )
 
     const totalPages = Math.ceil(count / rowsPerPage)
 
-
+    // recherche globale
     const handleGlobalSearch= (value) => {
         setActivePage(1)
-
-        let [title] = ""
-
-     
 
         if (value)
         {
             console.log('cas 1')
 
-            columns.map(item => {
-
-                console.log(item.title)
-    
-                title = item.title
-    
-            })
-
-            setFilters((prevFilters) => ({
-                ...prevFilters,
+            // rows.forEach(row => {
+            //     console.log(row)
                 
-                [title]: value,
-            }))
+            //     // if( row.includes(value))
+            //     // {
+            //     //     console.log(rows)
+            //     // }
+            // })
+            rows = [...rows].filter(word => word.includes(value));
+            // setFilters((prevFilters) => ({
+            //     ...prevFilters,
+                
+            //     [title]: value,
+            // }))
         }
         else
         {
             console.log('cas 2')
-            setFilters((prevFilters) => {
-
-                const updatedFilters = { ...prevFilters }
-
-                delete updatedFilters[title]
-           
-                return updatedFilters
-
-            })
+            setSearchRows(rows)
         }
     }
 
@@ -113,7 +114,8 @@ function DisplayTable( { columns, rows } )
     }
 
     // reset tous les filtres
-    const clearAll = () => {
+    function clearAll()
+    {
         setSort({ order: 'asc', orderBy: 'id' })
         setActivePage(1)
         setFilters({})

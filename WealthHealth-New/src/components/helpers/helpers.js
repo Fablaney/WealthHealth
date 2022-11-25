@@ -66,6 +66,15 @@ export function convertType(value)
     return value
 }
 
+export function searchRows(rows, searchRows)
+{
+    rows = [...rows].includes((searchRows) => {
+      
+    })
+
+    return rows 
+}
+
 export function filterRows(rows, filters)
 {
     if (isEmpty(filters)) return rows
