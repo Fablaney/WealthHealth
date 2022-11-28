@@ -18,7 +18,7 @@ import Calendar from '../components/DatePicker.jsx'
 
 // composents
 import Modale from '../components/Modal.jsx'
-import Dropdown from '../components/Dropdown.jsx'
+import Select from '../components/Select.jsx'
 
 function Home()
 {
@@ -33,23 +33,13 @@ function Home()
 
     const onSubmit = data => {
 
+        console.log(employeeActions.addEmployee(data))
         dispatch(employeeActions.addEmployee(data))
 
         document.querySelector(".modale").classList.remove("d-none")
     }
 
-    // state pour les dropdowns
-    const [dropdownDepartment, setDropdownDepartement] = useState("")
-    const handleDepartment = choix => {
-        console.log(choix)
-        setDropdownDepartement(choix)
-    }
-
-    const [dropdownState, setDropdownState] = useState("")
-    const handleState = choix => {
-        console.log(choix)
-        setDropdownState(choix)
-    }
+    let selectOptions = []
 
     return (
         <>
@@ -63,6 +53,7 @@ function Home()
 
                 <form className='' action="" onSubmit={handleSubmit(onSubmit)}>
 
+                    {/* FirstName */}
                     <label htmlFor="FirstName">First Name</label>
                     <input
                         type="text"
@@ -71,6 +62,7 @@ function Home()
                     />
                     {errors.FirstName && <span className='error-msg'>Please enter your first name.</span>}
 
+                    {/* LastName */}
                     <label htmlFor="LastName">Last Name</label>
                     <input
                         type="text"
@@ -79,37 +71,26 @@ function Home()
                     />
                     {errors.LastName && <span className='error-msg'>Please enter your last name.</span>}
 
-                    {/* date of birth with datepicker component plugin */}
+                    {/* BirthDate with datepicker component plugin */}
                     <label htmlFor="BirthDate">Date of Birth</label>
                     {/* composant */}
                     <Calendar setValue={setValue} label={'BirthDate'} name="birthdate" />
-        
+
+                    {/* StartDate with datepicker component plugin */}
                     <label htmlFor="StartDate">Start Date</label>
                     {/* composant */}
                     <Calendar setValue={setValue} label={'StartDate'} name="StartDate" />
 
+                    {/* Department */}
                     <label htmlFor="Department">Department</label>
-                    <input
-                        // hidden
-                        value={dropdownDepartment}
-                        type="text"
-                        id='Department'
-                        // list='Department-list'
-                        placeholder='Choose a Department'
-                        name='Department'
-                        onChange={handleDepartment}
-                        {...register('Department', {required: true}, )}
-                    />
-                    <Dropdown title={dropdownDepartment ? dropdownDepartment : "Choose a Department"}>
-                        {
-                            departments.map((department, index) => (
-                                <div value={department.name} key={index} onClick={() => handleDepartment(department.name)}>
-                                    {department.name}
-                                </div>
-                            ))
-                        }
-                    </Dropdown>
-                    {/* <datalist className='test' id='Department-list'>
+                    <Select
+                        name={"Department"}
+                        id={"Department"}
+                        register={"Department"}
+                        options={ selectOptions = departments.map((department) => ( department.name )) }
+                    >
+                    </Select>
+                    {/* <select name="Department" id="Department" {...register('Department', {required: true} )}>
                         {
                             departments.map((department, index) => (
                                 <option value={department.name} key={index}>
@@ -117,13 +98,14 @@ function Home()
                                 </option>
                             ))
                         }
-                    </datalist> */}
+                    </select> */}
                     {errors.Department && <span className='error-msg'>Please choose a department.</span>}
 
                     <fieldset className="address">
 
                         <legend>Address</legend>
 
+                        {/* Street */}
                         <label htmlFor="Street">Street</label>
                         <input
                             type="text"
@@ -131,8 +113,9 @@ function Home()
                             {...register("Street", { required: true })}
                         />
                         {errors.Street && <span className='error-msg'>Please enter your street.</span>}
-                        <label htmlFor="City">City</label>
 
+                        {/* City */}
+                        <label htmlFor="City">City</label>
                         <input
                             type="text"
                             id="City"
@@ -140,40 +123,27 @@ function Home()
                         />
                         {errors.City && <span className='error-msg'>Please enter your city.</span>}
 
+                        {/* State */}
                         <label htmlFor="State">State</label>
-                        <input
-                            value={dropdownState}
-                            // hidden
-                            type="text"
-                            id='State'
-                            // list='State-list'
-                            placeholder='Choose a State'
-                            name='State'
-                            onChange={handleState}
-                            {...register("State", { required: true })}
-                        />
-                        <Dropdown title={dropdownState ? dropdownState : "State List"}>
+                        <Select
+                            name={"State"}
+                            id={"State"}
+                            register={"State"}
+                            options={ selectOptions = states.map((state) => ( state.name )) }
+                        >
+                        </Select>
+                        {/* <select name="State" id="State" {...register("State", { required: true })}>
                             {
-                                states.map((state, index) => (
-                                    <div value={state.name} key={index} onClick={() => handleState(state.name)}>
-                                        {state.abbreviation} - {state.name}
-                                    </div>
-                                ))
-                            }
-                        </Dropdown>
-                        
-                        {/* <datalist id='State-list'>
-                        {
                                 states.map((state, index) => (
                                     <option value={state.name} key={index}>
                                         {state.abbreviation} - {state.name}
                                     </option>
                                 ))
                             }
-                        </datalist> */}
-                        
+                        </select> */}
                         {errors.State && <span className='error-msg'>Please enter your state.</span>}
 
+                        {/* ZipCode */}
                         <label htmlFor="Zipcode">Zip Code</label>
                         <input
                             type="number"

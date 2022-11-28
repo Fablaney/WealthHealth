@@ -8,13 +8,11 @@ function Dropdown({ title, children })
         setOpen(!open);
     }
 
-    
     if( title != title)
     {
         setOpen(!open);
     }
     
-
     return (
         <div className="dropdown">
 
