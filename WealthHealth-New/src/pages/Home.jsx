@@ -31,11 +31,6 @@ function Home()
     
     }, [])
 
-    useEffect((children) => {
-        
-
-    }, [])
-
     const onSubmit = data => {
 
         dispatch(employeeActions.addEmployee(data))
