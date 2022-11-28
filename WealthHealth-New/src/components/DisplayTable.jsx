@@ -13,7 +13,7 @@ function DisplayTable( { columns, rows } )
     // ok
     const [activePage, setActivePage] = useState(1)
 
-    // prod
+    // ok
     const [globalSearch, setGlobalSearch] = useState("")
 
     // ok
@@ -24,24 +24,16 @@ function DisplayTable( { columns, rows } )
 
     // ok
     const [rowsPerPage, setRowsPerPage] = useState(10) 
-  
 
-    // prod recherche globale
+    // ok
     const globalSearchRows = useMemo(() => searchRows(rows, columns, globalSearch), [rows, columns, globalSearch])
-
 
     // origine marche
     // lignes + filtres
-    // const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
-    // prod
     const filteredRows = useMemo(() => filterRows(globalSearchRows, filters), [globalSearchRows, filters])
 
     // lignes + filtres => sort asc / desc
     const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
-
-    // const filteredRows = filterRows(rows, filters)
-
-    // const sortedRows = sortRows(filteredRows, sort)
 
     // lignes + filtre + sort => paginées
     const calculatedRows = rows = paginateRows(sortedRows, activePage, rowsPerPage)
@@ -57,14 +49,10 @@ function DisplayTable( { columns, rows } )
 
         if (value)
         {
-            console.log('cas 1')
             setGlobalSearch(value)
         }
         else
         {
-            console.log('cas 2')
-            console.log(rows)
-            console.log(allrows)
             setGlobalSearch("")
         }
     }
@@ -111,13 +99,13 @@ function DisplayTable( { columns, rows } )
         setSort({ order: 'asc', orderBy: 'id' })
         setFilters({})
         setRowsPerPage(10)
-        rows = allrows
-
+        setGlobalSearch("")
         // je vide la valeur des inputs
         document.querySelectorAll("input").forEach(input => {
             console.log(input.value)
-            input.value =""
-        }) 
+            input.value = ""
+        })
+        rows = allrows 
     }
 
     // affiche XX lignes par page
@@ -191,9 +179,9 @@ function DisplayTable( { columns, rows } )
                 </tr>
 
                 <tr>
-                    {columns.map((column) => {
+                    {columns.map((column, index) => {
                         return (
-                        <th>
+                        <th  key={index}>
                             <input
                                 key={`${column.title}-search`}
                                 type="search"
@@ -213,10 +201,6 @@ function DisplayTable( { columns, rows } )
                     return (
                         <tr key={row.id} >
                             {columns.map((column) => {
-                                // console.log("column")
-                                // console.log(column)
-                                // console.log("column.format")
-                                // console.log(column.format)
                                 if (column.format)
                                 {
                                     return <td key={column.title}>{column.format(row[column.title])}</td>

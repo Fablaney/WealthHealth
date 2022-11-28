@@ -1,6 +1,7 @@
 // import react
 import React from 'react'
 import { useEffect } from 'react'
+import { useState } from 'react'
 
 // import redux
 import { useDispatch } from 'react-redux'
@@ -24,25 +25,39 @@ function Home()
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
 
         dispatch(employeeActions.getEmployees(mockedList))
     
     }, [])
-    
-    const onSubmit = data => {
 
-        // console.log("Nouvel employé ajouté")
-        // console.log(data)
+    useEffect((children) => {
+        
+
+    }, [])
+
+    const onSubmit = data => {
 
         dispatch(employeeActions.addEmployee(data))
 
         document.querySelector(".modale").classList.remove("d-none")
     }
 
+    // state pour les dropdowns
+    const [dropdownDepartment, setDropdownDepartement] = useState("")
+    const handleDepartment = choix => {
+        console.log(choix)
+        setDropdownDepartement(choix)
+    }
+
+    const [dropdownState, setDropdownState] = useState("")
+    const handleState = choix => {
+        console.log(choix)
+        setDropdownState(choix)
+    }
+
     return (
         <>
-
             <div className="page-header">
         
                 <h1>Home</h1>
@@ -80,14 +95,26 @@ function Home()
 
                     <label htmlFor="Department">Department</label>
                     <input
+                        // hidden
+                        value={dropdownDepartment}
                         type="text"
                         id='Department'
-                        list='Department-list'
+                        // list='Department-list'
                         placeholder='Choose a Department'
                         name='Department'
+                        onChange={handleDepartment}
                         {...register('Department', {required: true}, )}
                     />
-                    <datalist className='test' id='Department-list'>
+                    <Dropdown title={dropdownDepartment ? dropdownDepartment : "Choose a Department"}>
+                        {
+                            departments.map((department, index) => (
+                                <div value={department.name} key={index} onClick={() => handleDepartment(department.name)}>
+                                    {department.name}
+                                </div>
+                            ))
+                        }
+                    </Dropdown>
+                    {/* <datalist className='test' id='Department-list'>
                         {
                             departments.map((department, index) => (
                                 <option value={department.name} key={index}>
@@ -95,7 +122,7 @@ function Home()
                                 </option>
                             ))
                         }
-                    </datalist>
+                    </datalist> */}
                     {errors.Department && <span className='error-msg'>Please choose a department.</span>}
 
                     <fieldset className="address">
@@ -119,17 +146,28 @@ function Home()
                         {errors.City && <span className='error-msg'>Please enter your city.</span>}
 
                         <label htmlFor="State">State</label>
-                        <Dropdown title="Stateliste">liste</Dropdown>
                         <input
-                            hidden
+                            value={dropdownState}
+                            // hidden
                             type="text"
                             id='State'
-                            list='State-list'
+                            // list='State-list'
                             placeholder='Choose a State'
                             name='State'
+                            onChange={handleState}
                             {...register("State", { required: true })}
                         />
-                        <datalist id='State-list'>
+                        <Dropdown title={dropdownState ? dropdownState : "State List"}>
+                            {
+                                states.map((state, index) => (
+                                    <div value={state.name} key={index} onClick={() => handleState(state.name)}>
+                                        {state.abbreviation} - {state.name}
+                                    </div>
+                                ))
+                            }
+                        </Dropdown>
+                        
+                        {/* <datalist id='State-list'>
                         {
                                 states.map((state, index) => (
                                     <option value={state.name} key={index}>
@@ -137,7 +175,7 @@ function Home()
                                     </option>
                                 ))
                             }
-                        </datalist>
+                        </datalist> */}
                         
                         {errors.State && <span className='error-msg'>Please enter your state.</span>}
 
