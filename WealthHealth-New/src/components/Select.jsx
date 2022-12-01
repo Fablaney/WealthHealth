@@ -1,8 +1,6 @@
 import React from "react"
 function Select({ name, id, register, options })
 {
-
-    // console.log(options)
     return (
         <select name={name}
             id={id}

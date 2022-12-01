@@ -41,7 +41,6 @@ export default function Calendar({ setValue, label, name })
     for (let i of input)
     {
         i.setAttribute('aria-labelledBy', `"${name}"`)
-        console.log(i)
     }
 
     return (

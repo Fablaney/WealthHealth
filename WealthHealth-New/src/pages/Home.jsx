@@ -26,16 +26,11 @@ function Home()
     const dispatch = useDispatch()
 
     useEffect(() => {
-
         dispatch(employeeActions.getEmployees(mockedList))
-    
     }, [])
 
     const onSubmit = data => {
-
-        console.log(employeeActions.addEmployee(data))
         dispatch(employeeActions.addEmployee(data))
-
         document.querySelector(".modale").classList.remove("d-none")
     }
 

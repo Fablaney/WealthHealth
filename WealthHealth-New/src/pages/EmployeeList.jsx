@@ -1,10 +1,12 @@
 // import React
 import React, { Suspense, lazy } from 'react'
 import { useSelector } from 'react-redux'
-import { mockedList} from '../datas/datas.js'
+
+// import du plugin table perso depuis npm
+import DisplayTable from "table-for-react"
+
 // import perso
-// import DisplayTable from '../components/DisplayTable'
-const DisplayTable = lazy(() => import('../components/DisplayTable'));
+// const DisplayTable = lazy(() => import('../components/DisplayTable'));
 
 // import perso
 function EmployeeList()
@@ -12,7 +14,6 @@ function EmployeeList()
     // state
     // recuperation de la liste des employés du state
     const employees = useSelector(state => {
-        // console.log(state.employeesList.employees)
         return state.employeesList.employees.length ? state.employeesList.employees : []
     })
 
@@ -29,6 +30,7 @@ function EmployeeList()
         { title: 'Department', label: 'Department' },
     ]
 
+
     return (
         <>
             <div className="page-header">
@@ -41,7 +43,7 @@ function EmployeeList()
 
                 <Suspense fallback={<div>Loading...</div>}>
 
-                    <DisplayTable columns={columns} rows={employees} ></DisplayTable>
+                    <DisplayTable columns={columns} rows={employees}></DisplayTable>
 
                 </Suspense>
 

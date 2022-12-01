@@ -6,9 +6,21 @@ import { paginateRows } from "./helpers/helpers"
 import { Pagination } from "./helpers/pagination"
 import { searchRows } from "./helpers/helpers"
 
-function DisplayTable( { columns, rows } )
+function DisplayTable( { columns, rows, lines } )
 {
     const allrows = rows
+
+    // set default lines per pages at 10, 25, 50 100
+    let linesPerPage = []
+    
+    if(lines != undefined)
+    {
+        linesPerPage = lines
+    }
+    else
+    {
+        linesPerPage = [10, 25, 50, 100]
+    }
 
     // ok
     const [activePage, setActivePage] = useState(1)
@@ -102,16 +114,15 @@ function DisplayTable( { columns, rows } )
         setGlobalSearch("")
         // je vide la valeur des inputs
         document.querySelectorAll("input").forEach(input => {
-            console.log(input.value)
             input.value = ""
         })
+
         rows = allrows 
     }
 
     // affiche XX lignes par page
     function handleEntries(numberEntries)
     {
-        // console.log(numberEntries)
         let entries = numberEntries
         clearAll()
         setRowsPerPage(entries)
@@ -125,11 +136,12 @@ function DisplayTable( { columns, rows } )
             <div className='show'>
                 Show
                 &nbsp;
-                <select name="entries-number" onChange={(event) => handleEntries(event.target.value)}>
-                    <option>10</option>
-                    <option>25</option>
-                    <option>50</option>
-                    <option>100</option>
+                <select id="select-entries" name="entries-number" onChange={(event) => handleEntries(event.target.value)}>
+                    {
+                        linesPerPage.map((line, index) => {
+                            return <option key={index}>{line}</option>
+                        })
+                    }
                 </select>
                 &nbsp;
                 Entries
