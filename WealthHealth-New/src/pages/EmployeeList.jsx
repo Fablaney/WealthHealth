@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux'
 
 // import du plugin table perso depuis npm
 // problème avec export /export default
-import {DisplayTable} from "table-for-react"
+// import {DisplayTable} from "table-for-react"
 
 // import perso
-// const DisplayTable = lazy(() => import('../components/DisplayTable'));
+const DisplayTable = lazy(() => import('../components/DisplayTable'));
 
 // import perso
 function EmployeeList()
@@ -30,6 +30,7 @@ function EmployeeList()
         { title: 'Zipcode', label: 'Zip code' },
         { title: 'Department', label: 'Department' },
     ]
+   
 
     return (
         <>
