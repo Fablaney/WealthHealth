@@ -199,7 +199,7 @@ function DisplayTable( { columns, rows, lines } )
                                 key={`${column.title}-search`}
                                 type="search"
                                 placeholder={`${column.title}`}
-                                value={filters[column.title]}
+                                value={filters[column.title] || ""}
                                 onChange={(event) => handleSearch(event.target.value, column.title)}
                             />
                         </th>
