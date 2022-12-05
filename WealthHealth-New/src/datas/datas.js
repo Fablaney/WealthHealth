@@ -264,7 +264,7 @@ const mockedList = [
         Street: '7 Route de Dammartin',
         City: 'Eugene',
         State: 'OR',
-        Zipcode: '0123',
+        Zipcode: 80123,
         Department: 'Marketing'
     },
     {
@@ -275,7 +275,7 @@ const mockedList = [
         Street: 'A Great Road',
         City: 'El Paso',
         State: 'TX',
-        Zipcode: '9876',
+        Zipcode: 90876,
         Department: 'Sales'
     },
     {
@@ -286,7 +286,7 @@ const mockedList = [
         Street: 'Rue de la paix',
         City: 'Orlando',
         State: 'AZ',
-        Zipcode: '0578',
+        Zipcode: 10578,
         Department: 'Consulting'
     },
     {
@@ -297,7 +297,7 @@ const mockedList = [
         Street: 'Rue du Paradis',
         City: 'Seattle',
         State: 'WA',
-        Zipcode: '0000',
+        Zipcode: 10666,
         Department: 'Consulting'
     },
     {
@@ -308,7 +308,7 @@ const mockedList = [
         Street: '10 Grande Rue',
         City: 'Roseburg',
         State: 'CA',
-        Zipcode: '07771',
+        Zipcode: 71771,
         Department: 'Sales'
     },
     {
@@ -319,7 +319,7 @@ const mockedList = [
         Street: 'Avenue Magenta',
         City: 'Springfield',
         State: 'MN',
-        Zipcode: '92045',
+        Zipcode: 92045,
         Department: 'Engineering'
     },
     {
@@ -330,7 +330,7 @@ const mockedList = [
         Street: '254 Main Lane',
         City: 'Redmon',
         State: 'FL',
-        Zipcode: '09324',
+        Zipcode: 19324,
         Department: 'Marketing'
     },
     {
@@ -341,7 +341,7 @@ const mockedList = [
         Street: 'Pretty Court',
         City: 'Ben',
         State: 'ID',
-        Zipcode: '12048',
+        Zipcode: 12048,
         Department: 'Sales'
     },
     {
@@ -352,7 +352,7 @@ const mockedList = [
         Street: 'Fillmore Street',
         City: 'Sisters',
         State: 'OR',
-        Zipcode: '97402',
+        Zipcode: 97402,
         Department: 'Sales'
     },
     {
@@ -363,7 +363,7 @@ const mockedList = [
         Street: 'Happy Street',
         City: 'Plendelton',
         State: 'NY',
-        Zipcode: '345234',
+        Zipcode: 34526,
         Department: 'Consulting'
     },
     {
@@ -374,7 +374,7 @@ const mockedList = [
         Street: 'Salmon Lane',
         City: 'Burley',
         State: 'KS',
-        Zipcode: '2452345',
+        Zipcode: 24523,
         Department: 'Sales'
     },
     {
@@ -385,7 +385,7 @@ const mockedList = [
         Street: 'Avenue Somewhere',
         City: 'Skinner',
         State: 'OH',
-        Zipcode: '24624523',
+        Zipcode: 34600,
         Department: 'Engineering'
     }
 ]

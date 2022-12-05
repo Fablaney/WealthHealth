@@ -30,7 +30,6 @@ function EmployeeList()
         { title: 'Zipcode', label: 'Zip code' },
         { title: 'Department', label: 'Department' },
     ]
-   
 
     return (
         <>

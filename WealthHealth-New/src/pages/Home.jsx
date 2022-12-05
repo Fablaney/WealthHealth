@@ -78,14 +78,14 @@ function Home()
 
                     {/* Department */}
                     <label htmlFor="Department">Department</label>
-                    <Select
+                    {/* <Select
                         name={"Department"}
                         id={"Department"}
                         register={"Department"}
                         options={ selectOptions = departments.map((department) => ( department.name )) }
                     >
-                    </Select>
-                    {/* <select name="Department" id="Department" {...register('Department', {required: true} )}>
+                    </Select> */}
+                    <select name="Department" id="Department" {...register('Department', {required: true} )}>
                         {
                             departments.map((department, index) => (
                                 <option value={department.name} key={index}>
@@ -93,7 +93,7 @@ function Home()
                                 </option>
                             ))
                         }
-                    </select> */}
+                    </select>
                     {errors.Department && <span className='error-msg'>Please choose a department.</span>}
 
                     <fieldset className="address">
@@ -120,14 +120,14 @@ function Home()
 
                         {/* State */}
                         <label htmlFor="State">State</label>
-                        <Select
+                        {/* <Select
                             name={"State"}
                             id={"State"}
                             register={"State"}
                             options={ selectOptions = states.map((state) => ( state.name )) }
                         >
-                        </Select>
-                        {/* <select name="State" id="State" {...register("State", { required: true })}>
+                        </Select> */}
+                        <select name="State" id="State" {...register("State", { required: true })}>
                             {
                                 states.map((state, index) => (
                                     <option value={state.name} key={index}>
@@ -135,7 +135,7 @@ function Home()
                                     </option>
                                 ))
                             }
-                        </select> */}
+                        </select>
                         {errors.State && <span className='error-msg'>Please enter your state.</span>}
 
                         {/* ZipCode */}

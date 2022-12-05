@@ -28,8 +28,8 @@ export function isNil(value)
 export function isDateString(value)
 {
     if (!isString(value)) return false
-  
-    return value.match(/^\d{2}-\d{2}-\d{4}$/)
+
+    return value.match(/^[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/g)
 }
 
 export function convertDateString(value)
@@ -51,6 +51,7 @@ export function convertType(value)
     if (isNumber(value))
     {
         return value.toString()
+        // return value
     }
 
     if (isDateString(value))
