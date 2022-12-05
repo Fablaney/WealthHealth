@@ -1,7 +1,6 @@
 // import react
 import React from 'react'
 import { useEffect } from 'react'
-import { useState } from 'react'
 
 // import redux
 import { useDispatch } from 'react-redux'
@@ -15,7 +14,6 @@ import { employeeActions } from '../redux/employeeListSlice'
 
 // plugin
 import Calendar from '../components/DatePicker.jsx'
-// import Select from 'react-select'
 
 // composents
 import Modale from '../components/Modal.jsx'
