@@ -1,7 +1,9 @@
 const states = [
     {
         "name": "Alabama",
-        "abbreviation": "AL"
+        // "value": "Alabama",
+        "abbreviation": "AL",
+        // "label": "Alabama"
     },
     {
         "name": "Alaska",
@@ -385,7 +387,7 @@ const mockedList = [
         Street: 'Avenue Somewhere',
         City: 'Skinner',
         State: 'OH',
-        Zipcode: 34600,
+        Zipcode: 34,
         Department: 'Engineering'
     }
 ]

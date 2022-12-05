@@ -1,15 +1,14 @@
 import React from "react"
-function Select({ name, id, register, options })
+function Select({ id, options })
 {
     return (
-        <select name={name}
+        <select 
             id={id}
-            // {...register({register}, {required: true} )}
         >
             {
                 options.map((option, index) => (
-                    <option value={option} key={index}>
-                        {option}
+                    <option value={option.name} key={index}>
+                        {option.name}
                     </option>
                 ))
             }

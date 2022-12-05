@@ -208,7 +208,8 @@ function DisplayTable( { columns, rows, lines } )
                 </tr>
 
             </thead>
-
+            
+            {/* diplay datas */}
             <tbody>
                 {calculatedRows.map((row, index) => {
                     return (
