@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux'
 
 // import useForm
 import { useForm } from 'react-hook-form'
-import { Controller } from 'react-hook-form'
 
 // import perso
 import { mockedList, states, departments } from '../datas/datas.js'
@@ -17,14 +16,13 @@ import { employeeActions } from '../redux/employeeListSlice'
 // plugin
 import Calendar from '../components/DatePicker.jsx'
 // import Select from 'react-select'
-import Select from "../components/Select"
 
 // composents
 import Modale from '../components/Modal.jsx'
 
 function Home()
 {
-    const { register, handleSubmit, control, setValue, formState: { errors } } = useForm()
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -81,13 +79,6 @@ function Home()
 
                     {/* Department */}
                     <label htmlFor="Department">Department</label>
-                    {/* <Select
-                        name={"Department"}
-                        id={"Department"}
-                        register={"Department"}
-                        options={ selectOptions = departments.map((department) => ( department.name )) }
-                    >
-                    </Select> */}
                     <select name="Department" id="Department" {...register('Department', {required: true} )}>
                         {
                             departments.map((department, index) => (
@@ -123,23 +114,11 @@ function Home()
 
                         {/* State */}
                         <label htmlFor="State">State</label>
-                        {/* <Controller
-                            control={control}
-                            rules={{ required: "State is required" }}
-                            name="State"
-                            id="State"
-                            defaultValue={states[0]}
-                            render={({ field }) => 
-                            (
-                                <Select {...field.value.name} options={states}></Select>
-                            )}
-                        /> */}
                         <select name="State" id="State" {...register("State", { required: true })}>
                             {
                                 states.map((state, index) => (
-                                   
-                                    <option value={state.name} key={index}>
-                                        {state.abbreviation} - {state.name}
+                                    <option value={state.abbreviation} key={index}>
+                                        {state.name}
                                     </option>
                                 ))
                             }

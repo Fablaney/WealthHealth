@@ -1,9 +1,7 @@
 const states = [
     {
         "name": "Alabama",
-        // "value": "Alabama",
-        "abbreviation": "AL",
-        // "label": "Alabama"
+        "abbreviation": "AL"
     },
     {
         "name": "Alaska",
