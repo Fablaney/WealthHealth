@@ -51,7 +51,6 @@ export function convertType(value)
     if (isNumber(value))
     {
         return value.toString()
-        // return value
     }
 
     if (isDateString(value))
