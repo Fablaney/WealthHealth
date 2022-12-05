@@ -385,7 +385,7 @@ const mockedList = [
         Street: 'Avenue Somewhere',
         City: 'Skinner',
         State: 'OH',
-        Zipcode: 34,
+        Zipcode: 34080,
         Department: 'Engineering'
     }
 ]
