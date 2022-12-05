@@ -156,7 +156,7 @@ function DisplayTable( { columns, rows, lines } )
 
         <table className="table">
             <thead>
-
+                {/* sort columns */}
                 <tr>
                     {columns.map((column) => {
                         const sortIcon = () => {
@@ -177,7 +177,7 @@ function DisplayTable( { columns, rows, lines } )
                                 return <i className="fa-solid fa-sort"></i>
                             }
                         }
-
+                        
                         return (
                             <th key={column.title}  onClick={() => handleSort(column.title)}>
 
@@ -190,10 +190,11 @@ function DisplayTable( { columns, rows, lines } )
                     })}
                 </tr>
 
+                {/* search in this column*/}
                 <tr>
                     {columns.map((column, index) => {
                         return (
-                        <th  key={index}>
+                        <th key={index}>
                             <input
                                 key={`${column.title}-search`}
                                 type="search"

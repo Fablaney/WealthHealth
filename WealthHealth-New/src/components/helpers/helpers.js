@@ -41,6 +41,10 @@ export function toLower(value)
     {
         return value.toLowerCase()
     }
+    if (isNumber(value))
+    {
+        return value.toString().toLowerCase()
+    }
     return value
 }
 
