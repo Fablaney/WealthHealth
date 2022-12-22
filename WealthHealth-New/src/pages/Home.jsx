@@ -29,7 +29,7 @@ function Home()
 
     const onSubmit = data => {
         dispatch(employeeActions.addEmployee(data))
-        console.log(data)
+        // console.log(data)
         document.querySelector(".modale").classList.remove("d-none")
     }
 
