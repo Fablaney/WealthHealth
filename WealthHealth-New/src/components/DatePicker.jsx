@@ -14,9 +14,9 @@ export default function Calendar({ setValue, label, name })
     setValue(label, selectedDate.toLocaleDateString())
 
     const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
-        <button className="custom-input-date" onClick={onClick} ref={ref}>
+        <div className="custom-input-date" onClick={onClick} ref={ref}>
             {value}
-        </button>
+        </div>
     ))
 
     const input = document.getElementsByClassName('calendar-datepicker')
